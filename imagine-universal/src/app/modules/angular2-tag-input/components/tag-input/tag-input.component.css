@@ -1,0 +1,39 @@
+.inputElement {
+  font-family: "FontAwesome", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  height: 30px;
+  line-height: 32px;
+  display: inline-block;
+  background: #e0e0e0;
+  padding: 0 12px;
+  border-radius: 90px;
+  margin-right: 10px;
+  transition: all 0.12s ease-out;
+}
+
+.ng2-tag-input-form {
+  display: inline;
+}
+
+.ng2-tag-input-field {
+  font-family: "FontAwesome", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  display: inline-block;
+  width: 175px;
+  box-shadow: none;
+  border: 0;
+  padding: 8px 0;
+}
+
+.ng2-tag-input-field:focus {
+  outline: 0;
+}
+
+.rl-tag-input-autocomplete-container {
+  position: relative;
+  z-index: 10;
+}
+
+.ng2-tag-input-focus {
+  box-shadow: 0 2px #0d8bff;
+}

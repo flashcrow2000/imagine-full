@@ -1,0 +1,20 @@
+<img src="{{imageData}}" width="150px" height="150px"/>
+<div class="col-md-6 col-md-offset-3">
+	<p> Username: {{getUsername()}}</p>
+	<p>E-mail: {{getEmail()}}</p>
+	<p class="alert" *ngIf="!hasEmail">An e-mail address makes it easier to receive news and updates!</p>
+	<p *ngIf="isFacebookLinked()"> Facebook account linked!</p>
+	<p *ngIf="isGoogleLinked()"> Google account linked!</p>
+	<hr>
+	<button class="btn btn-primary" routerLink='edit'>Edit</button>
+</div>
+
+<div class="col-md-6 col-md-offset-3">
+	<form (ngSubmit)="onSubmit()" [formGroup]="uploadForm">
+		<input #file type="file" (change)="onChange()" name="picture" accept="application/x-zip-compressed,image/*">
+
+		<input class="form-control" type="text" name="description" placeholder="Description or Message">
+
+		<input class="btn btn-primary" type="submit" value="submit" >
+	</form>
+</div>

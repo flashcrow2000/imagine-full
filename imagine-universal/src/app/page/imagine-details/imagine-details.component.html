@@ -1,0 +1,36 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="banner-img">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/SehTZ1qJVPo?rel=0&autoplay=1&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+        <a *ngIf="!userLoggedIn" [routerLink]="['/signup']" class="btn btn-block btn-default btn-lg">BECOME IMAGINER</a>
+        <a *ngIf="userLoggedIn" [routerLink]="['/new-idea']" class="btn btn-block btn-default btn-lg">ADD A NEW IDEA <span class="fa fa-plus-circle"></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="text-center">What is Imagine</h1>
+        <p>
+          Welcome to Imagine ALL THE PEOPLE <br><br>
+          This is a project inspired by a John Lennon song called Imagine. We imagine our world without possessions, countries and religions. But why should we only imagine world peace in the future? Let's start working on world peace today, to make this dream real by the year 2222!
+        </p>
+        <p>How? You start by sharing small ideas or taking part in small actions to help eliminate possessions, countries and religions. Sign up at www.imagineallthepeople.world to give your support and help to manifest our goal of world peace. After signing up, you can then start to contribute your own small ideas or actions in order to create world peace within the three categories of possessions, countries, and religions.</p>
+
+        <p>Here are <a [routerLink]="['/inspiring']">some examples to get inspired</a>. Support other ideas you like, share them with your friends, and spread the word. As John Lennon said: "You may say I am a dreamer, but I am not the only one"...</p>
+
+        <h3 class="text-right">Let's make this dream a reality.</h3>
+
+      </div>
+
+    </div>
+  </div>
+</section>

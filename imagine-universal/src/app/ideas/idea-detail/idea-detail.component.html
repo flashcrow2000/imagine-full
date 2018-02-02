@@ -1,0 +1,48 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="banner-img">
+          <header>
+            <h1>{{selectedIdea.title}}</h1></header>
+          <div class="row">
+            <div class="col-sm-6">
+              <p>{{selectedIdea.description}}</p>
+            </div>
+            <div class="col-sm-6">
+              <img src="{{imageURL}}" alt="" class="img-responsive imageFit">
+            </div>
+          </div>
+          <footer class="row">
+            <div class="col-sm-6">
+              <img src="assets/images/cloud.png" alt="" class="" style="width:32px; height: 32px; margin-right: 5px; margin-left: 10px;">
+              <span>Imaginers joined this idea: {{selectedIdea.followers ? selectedIdea.followers.length : 0}}</span>
+            </div>
+            <div class="col-sm-6">
+              <span class="fa fa-user"></span><span>Author of this idea: <a [routerLink]="[userIdeasURL]" id="username">{{userName}}</a></span>
+            </div>
+          </footer>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <a *ngIf="!ownIdea" (click)="onSupport()" title="" class="btn btn-default btn-lg btn-block support">Join this Idea <span class="fa fa-heart"></span></a>
+            <a *ngIf="ownIdea" (click)="onEditIdea()" title="" class="btn btn-default btn-lg btn-block support">Edit Idea <span class="fa fa-edit"></span></a>
+          </div>
+          <div class="col-sm-6">
+            <a (click)="onShare()" title="" class="btn btn-default btn-lg btn-block support">Share this Idea <span class="fa fa-share"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<aside class="container">
+  <p>
+    For adding comments, please, log in or sign up in DISQUS
+  </p>
+</aside>
+
+<!-- for disqus -->
+<div id="disqus_thread" class="container"></div>
+<div #el ></div>
+<!-- end for disqus -->

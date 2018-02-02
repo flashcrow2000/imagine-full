@@ -1,0 +1,46 @@
+<section *ngIf="!resetError && !resetSuccess">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5 center-col">
+        <h1>Reset your password</h1>
+
+          <label for="password">Password: </label>
+          <input type="password" id="password" name="password"  class="form-control"
+                 value="" placeholder="&#xf023; Password" #p1>
+          <label for="password2">Repeat password: </label>
+          <input type="password" id="password2" name="password2" class="form-control"
+                 value="" placeholder="&#xf023; Repeat password" #p2
+                 (keyup)="testPasswords()">
+            <div *ngIf="noMatch" style="color:red;">Passwords do not match!</div>
+          <div *ngIf="invalidForm" style="color: red;"> Please enter your information!</div>
+          <button type="button" class="btn btn-default form-control"
+                  [disabled]="noMatch" (click)="reset()"  style="margin-top: 10px;">Reset password</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="resetSuccess">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5 center-col">
+        <h1>Password was reset successfuly</h1>
+
+        <p>You can now <a [routerLink]="['/login']">login</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="resetError">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5 center-col">
+        <h1>Password not reset</h1>
+
+        <p>There was an error reseting your password.<br> Please request a new reset link from
+          the <a [routerLink]="['/login']">login page</a>, by clicking 'Forgot your password'</p>
+      </div>
+    </div>
+  </div>
+</section>

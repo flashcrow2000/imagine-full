@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" style="max-width: 350px">
+        <div formGroupName="userData">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              formControlName="username"
+              class="form-control">
+            <span
+              *ngIf="!signupForm.get('userData.username').valid && signupForm.get('userData.username').touched"
+              class="help-block">
+              <!--span *ngIf="signupForm.get('userData.username').errors['nameIsForbidden']">This name is invalid!</span-->
+              <span *ngIf="signupForm.get('userData.username').errors['required']">This field is required!</span>
+
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="email">email</label>
+            <input
+              type="text"
+              id="email"
+              formControlName="email"
+              class="form-control">
+            <span
+              *ngIf="!signupForm.get('userData.email').valid && signupForm.get('userData.email').touched"
+              class="help-block">Please enter a valid email!</span>
+          </div>
+        </div> <!-- formGroupName userData close -->
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input
+            type="text"
+            id="location"
+            formControlName="location"
+            class="form-control">
+            <button class="btn btn-primary" type="button" routerLink="/location">Edit location</button>
+        </div>
+        <span
+          *ngIf="!signupForm.valid && signupForm.touched"
+          class="help-block">Please enter valid data!</span>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

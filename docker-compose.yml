@@ -1,0 +1,18 @@
+version: "2"
+services:
+  imagine-server:
+    build: ./imagine-server/
+    ports:
+      - "4000:4000"
+    links:
+      - mongo
+  imagine-universal:
+    build: ./imagine-universal/
+    ports:
+      - "3000:3000"
+  mongo:
+    image: mongo
+    volumes:
+      - /data/mongodb/db:/data/db
+    ports:
+      - "27017:27017"

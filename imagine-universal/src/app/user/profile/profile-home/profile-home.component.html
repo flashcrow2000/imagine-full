@@ -1,0 +1,66 @@
+<section class="blogPost">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 *ngIf="ideas.length > 0" class="text-center">My Ideas</h2>
+        <span *ngIf="ideas.length == 0" >
+          <h2 class="text-center">Congratulations, you are a new Imaginer!</h2>
+          <h3>Now you are able to edit your user profile and browse, join, share ideas in action from other Imaginers, using the menu, or add your own new idea.</h3>
+        </span>
+
+      </div>
+    </div>
+    <div *ngIf="showMoreIdeasVisible" class="row" style="margin-bottom: 25px;">
+      <div class="col-sm-6">
+        <a [routerLink]="['/new-idea']" class="btn btn-block btn-default btn-lg">Add new Idea <span class="fa fa-plus-circle"></span></a>
+      </div>
+      <div class="col-sm-6">
+        <a [routerLink]="[myIdeasURL]" class="btn btn-block btn-default btn-lg">See all my ideas </a>
+      </div>
+    </div>
+    <div *ngIf="!showMoreIdeasVisible" class="row">
+      <div class="col-sm-12">
+        <a [routerLink]="['/new-idea']" class="btn btn-block btn-default btn-lg">Add new Idea <span class="fa fa-plus-circle"></span></a>
+      </div>
+    </div>
+    <div *ngIf="ideasLoaded" class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <div *ngIf="ideas.length >= 1" class="col-sm-6 col-md-6 thumbnail_wrap">
+            <app-single-idea [idea]="ideas[0]"></app-single-idea>
+          </div>
+          <div *ngIf="ideas.length >= 2" class="col-sm-6 col-md-6 thumbnail_wrap">
+            <app-single-idea [idea]="ideas[1]"></app-single-idea>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngIf="ideas.length >= 3" class="col-sm-6 col-md-6 thumbnail_wrap">
+            <app-single-idea [idea]="ideas[2]"></app-single-idea>
+          </div>
+          <div *ngIf="ideas.length >= 4" class="col-sm-6 col-md-6 thumbnail_wrap">
+            <app-single-idea [idea]="ideas[3]"></app-single-idea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="requestEmail" class="modal-simple">
+  <div class="container modal-content-simple">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="text-center">Please enter your e-mail</h1>
+
+        <p>We need your email address to send notifications, no more than 2 times a month.</p>
+
+        <input type="email" id="email" value="" class="form-control" name="email"
+               placeholder="&#xf0e0; Email" #email>
+        <div *ngIf="!emailValid" style="color:red;">Please enter a valid e-mail</div>
+        <br><br>
+        <button class="btn btn-default form-control" (click)="onEmailAdded()">Accept</button>
+      </div>
+
+    </div>
+  </div>
+</div>

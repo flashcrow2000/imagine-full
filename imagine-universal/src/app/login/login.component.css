@@ -1,0 +1,33 @@
+input {
+  font-family: FontAwesome, "Helvetica Neue" !important;
+}
+
+h1,h2,h3,h4,h5,
+.address-number,
+.nN{
+  font-family: 'Gochi Hand', cursive !important;
+}
+
+.center-col {
+  float: none !important;
+  margin: 0 auto;
+}
+
+a {
+  color: #f06f30 !important;
+}
+
+.btn.btn-default {
+  background-color: #f06f30;
+  color: #fff;
+  border: 1px solid #fff;
+  -webkit-transition: 0.3s all ease-in-out;
+  -o-transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out;
+}
+.btn.btn-default:hover,
+.btn.btn-default:focus {
+  border: 1px solid #000;
+  background-color:#23527c;
+  color: #fff;
+}

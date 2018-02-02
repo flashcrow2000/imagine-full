@@ -1,0 +1,167 @@
+<div class="container">
+    <div class="row">
+
+        <div class="headerTop clearfix">
+            <div class="col-sm-6">
+                <a routerLink="/" class="hidden-xs">
+                    <img src="assets/images/imagine-logo.png" alt="">
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <div class="address-number">
+                    <p class="realNumber">Real in 2.222</p>
+                </div>
+            </div>
+        </div>
+        <div class="headerBottom">
+            <nav class="navbar navbar-default navber-custom white">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-brand hidden-sm hidden-md hidden-lg">
+                        <img src="assets/images/imagine-logo.png" alt="">
+                    </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav left-custom-left">
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/">Home</a></li>
+                        <li routerLinkActive="active"><a routerLink="/imagine">What is imagine</a></li>
+                        <li routerLinkActive="active"><a routerLink="/ideas">ideas</a></li>
+                        <li routerLinkActive="active"><a routerLink="/contribute">ways to be involved</a></li>
+                    </ul>
+                    <ul *ngIf="!userLoggedIn" class="nav navbar-nav navbar-right menu-log-reg">
+                        <li><a routerLink="/login">Login</a></li>
+                        <li><a routerLink="/signup">Sign up</a></li>
+                    </ul>
+                    <div *ngIf="userLoggedIn" class="nav navbar-nav navbar-right user-menu">
+                      <ul role="navigation" class="list-inline user-notifications">
+                        <li>
+                          <a [routerLink]="['/profile']" data-toggle="tooltip" title="User home" class="fa fa-home"></a>
+                        </li>
+                        <li>
+                          <a [routerLink]="['/new-idea']" data-toggle="tooltip" title="Add idea" class="fa fa-plus-circle"></a>
+                        </li>
+                        <li>
+                          <a [routerLink]="['/joined']" data-toggle="tooltip" title="Joined ideas" class="fa fa-heart-o"></a>
+                        </li>
+                        <li>
+                          <a [routerLink]="['/profile/notifications']" data-toggle="tooltip" title="Notifications" class="fa fa-bell-o" id="notificationsLink"></a><span *ngIf="notificationsCount > 0" class="count">{{notificationsCount}}</span>
+                        </li>
+                        <li class="dropdown profile">
+                          <span dropdown>
+                            <a dropdownToggle id="profileMenu" title="profile Menu" (click)="dropdownAction()">
+                              <img src="{{imgURL}}" alt="" class="profile_img" style="max-height: 57px; max-width: 57px;">
+                              <img src="/assets/images/default-profile-pic.png" alt="" class="profile_img" style="max-height: 57px; max-width: 57px;">
+                            </a>
+                            <ul *dropdownMenu
+                                id="profileOptions" class="dropdown-menu">
+                              <li>
+                                <a>{{username}}</a>
+                                <a href="#" id="editUser" data-toggle="modal" data-target="#editUserWindow">
+                                  <span class="fa fa-edit count"></span>
+                                </a>
+                              </li>
+                              <li>
+                                <a *ngIf="userLocation != ''" [routerLink]="['/location']">{{userLocation}}</a>
+                                <a *ngIf="userLocation == ''" [routerLink]="['/location']">Set location</a>
+                              </li>
+                              <!--li class="social">
+                                <a href="#facebookLink"><span class="fa fa-facebook-square"></span></a>
+                                <a class="social" href="#facebookLink"><span class="fa fa-twitter-square"></span></a>
+                              </li-->
+                              <li><a [routerLink]="[ownIdeasLink]">Ideas where you contribute: <br> <strong>{{ideaCount}}</strong></a></li>
+                              <li><a (click)="onLogout()" title="">Log Out</a></li>
+                            </ul>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                    <!--ul *ngIf="userLoggedIn" class="nav navbar-nav navbar-right menu-log-reg">
+                        <li><a routerLink="/new-idea">Add Idea</a></li>
+                        <li><a routerLink="/profile">Profile</a></li>
+                        <li><a (click)="onLogout()">Logout</a></li>
+                    </ul-->
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="userLoggedIn" class="modal fade" id="editUserWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit User Profile</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editForm" action="" method="POST" accept-charset="utf-8" class="">
+          <div class="form-group has-feedback row">
+            <label for="smPhoto" class="col-xs-3">Photo</label>
+            <img src="{{imgURL}}" alt="" class="col-xs-2 img-responsive">
+            <input #file type="file" id="smPhoto" name="smPhoto" value="" class="col-xs-6"
+                   accept="application/x-zip-compressed,image/*">
+            <span class="col-xs-1 glyphicon glyphicon-folder-open"></span>
+          </div>
+          <div class="row">
+            <label for="firstName" class="col-sm-6 form-group has-feedback">First name</label>
+            <label for="lastName" class="col-sm-6 form-group has-feedback">Last name</label>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group has-feedback">
+              <input type="text" id="firstName" name="firstName" value="{{firstName}}"
+                     formControlName="firstName"
+                     class="form-control" placeholder="&#xf007; First Name">
+            </div>
+            <div class="col-sm-6 form-group has-feedback">
+              <input type="text" id="lastName" name="lastName" value="{{lastName}}"
+                     formControlName="lastName"
+                     class="form-control" placeholder="&#xf007; Last Name">
+            </div>
+          </div>
+          <div class="form-group has-feedback">
+            <label for="email">Email </label>
+            <input type="text" id="email" name="email" value="{{email}}"
+                   formControlName="email"
+                   class="form-control" placeholder="@Email not set">
+            <div class="form-control-feedback message">
+              <p>The username already exists.</p>
+            </div>
+          </div>
+          <div class="form-group has-feedback">
+            <label for="Facebook">Facebook</label>
+            <input type="text" id="Facebook" name="Facebook" value="{{fb}}"
+                   formControlName="facebook"
+                   class="form-control" placeholder="&#xf09a; Facebook">
+          </div>
+          <div class="form-group has-feedback">
+            <label for="twitter">Twitter</label>
+            <input type="text" id="Twitter" name="Twitter" value="{{twit}}"
+                   formControlName="twitter"
+                   class="form-control" placeholder="&#xf099; Twitter">
+          </div>
+          <div class="form-group has-feedback">
+            <label for="Instagram">Instagram</label>
+            <input type="text" id="Instagram" name="Instagram" value="{{insta}}"
+                   formControlName="instagram"
+                   class="form-control" placeholder="&#xf16d; Instagram">
+          </div>
+          <div class="form-group has-feedback">
+            <label for="Web">Web</label>
+            <input type="text" id="Web" name="Web" value="{{web}}"
+                   formControlName="web"
+                   class="form-control" placeholder="&#xf0ac; Web">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" (click)="onEdit()" data-dismiss="modal" class="btn btn-default">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+h1,h2,h3,h4,h5,
+.address-number,
+.nN{
+  font-family: 'Gochi Hand', cursive;
+  color: #000000;
+}
+
+.h4, .h5, .h6, h4, h5, h6, p {
+  margin-bottom: 15px;
+}
+p {
+
+  font-size: 15px;
+}

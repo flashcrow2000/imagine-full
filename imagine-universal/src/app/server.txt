@@ -1,0 +1,4 @@
+ssh cosmin@docker.imagineallthepeople.world
+
+imagine/imagine-project -> app
+imagine/imagine-server -> server

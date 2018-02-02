@@ -1,0 +1,9 @@
+.b1 {
+	border: solid 1px black;
+	height: 40px;
+}
+
+.mainMenu {
+	padding: 15px;
+    padding-left: 30px;
+}

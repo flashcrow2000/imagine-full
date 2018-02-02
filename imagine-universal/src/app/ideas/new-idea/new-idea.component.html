@@ -1,0 +1,125 @@
+<section *ngIf="!ideaAdded" class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 center-col" style="float: none;">
+        <h1>Imagine a New Idea</h1>
+        <p>Here is a list of ideas to get inspired <a [routerLink]="['/inspiring']" class="fancyLink">Click here</a></p>
+        <form action="" method="POST" [formGroup]="newIdeaForm"
+              (ngSubmit)="onSubmit()" accept-charset="utf-8" class="">
+          <div class="form-group has-feedback">
+            <label for="ideaTitle">Title of the Idea: </label>
+            <input type="text" id="ideaTitle" name="ideaTitle"
+                   formControlName="title"
+                   value="" class="form-control" placeholder="&#xf044; Title of the idea">
+          </div>
+          <span
+            *ngIf="!newIdeaForm.get('title').valid && newIdeaForm.get('title').touched"
+            class="help-block" style="color: red;">
+              <span *ngIf="newIdeaForm.get('title').errors['required']">This field is required!</span>
+          </span>
+
+          <div class="form-group has-feedback">
+            <label for="hashtags">Hashtags: (press Enter to autocomplete)</label><br>
+            <rl-tag-input  [(ngModel)]="ideaHashtags" [ngModelOptions]="{standalone: true}"
+                          [autocomplete]="true" [autocompleteItems]="hashtagsList"
+                          [autocompleteMustMatch]="false"
+                          *ngIf="showTagsInput"
+                           class="tagsElement"
+                           placeholder="&#xf292; Write the idea hashtags"></rl-tag-input>
+            <!--input *ngIf="showTagsInput" type="text" id="hashtags" name="hashtags"
+                   class="form-control" placeholder="&#xf292; Write the idea's hashtags"
+                   auto-complete [source]="hashtagsList"
+                   (keyup)="refreshControl()" (focus)="refreshControl()"
+                   (valueChanged)="onHashtagChanged()" (click)="refreshControl()"-->
+          </div>
+          <div class="row">
+            <div class="form-group has-feedback">
+              <div class="col-sm-12">
+                <label for="photoIdea">Photo of the Idea: </label>
+                <input #file type="file" id="photoIdea" name="photoIdea"
+                       value="" class="form-control" accept="image/gif, image/jpg, image/png">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group has-feedback">
+              <div class="col-sm-12">
+                <label>Or choose one of these</label>
+                <div class="photoIdeaMoreList">
+                  <ul class="thumbnails image_picker_selector">
+                    <li class="first">
+                      <div class="thumbnail first" [ngClass]="{selected: img1Selected}">
+                        <img class="image_picker_image first" id="img1" src="assets/images/slider_countries_imagine.jpg"
+                             alt="countries" (click)="defaultImageClick($event)">
+                      </div>
+                    </li>
+                    <li>
+                      <div class="thumbnail" [ngClass]="{selected: img2Selected}">
+                        <img class="image_picker_image" id="img2" src="assets/images/slider_religion_imagine.jpg"
+                             alt="religion" (click)="defaultImageClick($event)">
+                      </div>
+                    </li>
+                    <li class="last">
+                      <div class="thumbnail last" [ngClass]="{selected: img3Selected}">
+                        <img class="image_picker_image last" id="img3" src="assets/images/slider_possessions_imagine.jpg"
+                             alt="possessions" (click)="defaultImageClick($event)">
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-bottom: 15px">
+            <div class="form-group has-feedback">
+              <div class="col-sm-12">
+                <label for="typeSelect">Idea type</label>
+                <div>
+                  <select formControlName="typeSelect" id="typeSelect">
+                    <option value="-" selected="selected"> - Select the idea type - </option>
+                    <option value="1">Imagine there's no countries</option>
+                    <option value="2">Imagine no possessions</option>
+                    <option value="0">Imagine no religion too</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span *ngIf="noType" style="color:red;">This field is required!</span>
+          <div class="form-group has-feedback has-feedback-left">
+            <label for="ideaDescription">Description of the Idea: </label>
+            <textarea id="ideaDescription" name="ideaDescription"
+                      formControlName="description"
+                      value="" class="form-control" placeholder="Description of the idea"></textarea>
+            <i class="form-control-feedback fa fa-pencil-square-o"></i>
+          </div>
+          <span
+            *ngIf="!newIdeaForm.get('description').valid && newIdeaForm.get('description').touched"
+            class="help-block" style="color: red;">
+              <span *ngIf="newIdeaForm.get('description').errors['required']">This field is required!</span>
+          </span>
+          <span *ngIf="imageNeeded" style="color:red">Upload an image, or choose a default one!</span>
+          <div class="text-center">
+            <button type="button" class="btn btn-default btn-lg" (click)="resetForm()">Reset</button>
+            <button *ngIf="!updateIdea" type="submit" #addBtn class="btn btn-default btn-lg">Add Idea</button>
+            <button *ngIf="updateIdea" type="submit" #addBtn class="btn btn-default btn-lg">Update Idea</button>
+            <!--<button class="btn btn-primary" type="button" (click)="prePopulate()">Pre populate</button>-->
+          </div>
+
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section *ngIf="ideaAdded" class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 center-col" style="float: none;">
+        Your Idea was created successfuly. <a [routerLink]="[ideaURL]">Click here</a> to see the details.
+      </div>
+    </div>
+  </div>
+</section>

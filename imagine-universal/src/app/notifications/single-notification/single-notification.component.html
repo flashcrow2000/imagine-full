@@ -1,0 +1,27 @@
+<div class="thumbnail">
+  <div class="caption row">
+    <div class="thumShr text-center col-sm-2">
+      <div>
+        <a class="thumShrNum colorJoi">{{totalFollowers}}</a>
+        <a class="btn btn-join" style="cursor: pointer">
+          JOINS
+        </a>
+      </div>
+      <div>
+        <a class="thumShrNum colorJoi">{{totalShares}}</a>
+        <a class="btn btn-shareds" style="cursor: pointer">SHARES</a>
+      </div>
+    </div>
+    <div class="thumTxt col-sm-7">
+      <small class="update">{{userName}} has followed your idea!</small>
+
+      <h3 class="blogPost-title">{{ideaTitle}}</h3>
+      <p>{{ideaDescription}}<a *ngIf="readMoreLinkVisible" [routerLink]=[readMoreLink]>Read more</a></p>
+
+    </div>
+    <div class="thumImg col-sm-3">
+      <img src="{{imageURL}}" alt="biblioteca" class="img-responsive">
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>

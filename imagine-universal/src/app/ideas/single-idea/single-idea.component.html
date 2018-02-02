@@ -1,0 +1,38 @@
+
+  <div class="thumbnail">
+    <div class="thumImg">
+       <img width="100%" src="{{imageURL}}" class="imageFit lazyload"
+            [ngClass]="{'thumbnail_no_interaction':disableActions}" (click)="onImgClick()">
+    </div>
+    <div class="caption">
+       <h3 class="blogPost-title"
+           [ngClass]="{'thumbnail_no_interaction':disableActions}" (click)="onImgClick()">{{idea.title}}</h3>
+      <p class="description">{{idea.description}}</p>
+      <p class="buttons">
+        <span _ngcontent-c4="" *ngIf="!disableActions">
+         <a _ngcontent-c4="" *ngIf="!ownIdea && !joinedIdea" (click)="follow()" class="btn btn-join" role="button">JOIN</a>
+         <a _ngcontent-c4="" *ngIf="ownIdea" class="btn btn-join" role="button">{{idea.followersTotal}} joined this idea</a>
+         <a _ngcontent-c4="" *ngIf="joinedIdea" class="btn btn-join" role="button">You joined this idea</a>
+         |
+         <a _ngcontent-c4="" (click)="share()" class="btn btn-share" role="button">SHARE</a>
+       </span>
+      </p><!--{{ideaDescription}}<a *ngIf="ideaTruncated" [routerLink]=[showMoreLink]>Show more</a></p-->
+    </div>
+   </div>
+
+<div #el></div>
+<!--div class = "panel panel-primary">
+   <div class = "panel-heading">
+      <h3 class = "panel-title">{{idea.title}}</h3>
+   </div>
+
+   <div class = "panel-body" style="height:200px;">
+      {{idea.description}} - {{idea.followers ? idea.followers.length : 0}}
+   </div>
+
+   <div class = "panel-footer pull-right">by {{idea.user_id}}</div>
+   <div class="panel-footer">
+   	<span style="cursor: pointer;" (click)="follow()">Follow</span>
+   	<span style="cursor: pointer;" (click)="share()">Share</span>
+   </div>
+</div-->

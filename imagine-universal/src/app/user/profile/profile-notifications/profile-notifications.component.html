@@ -1,0 +1,14 @@
+<section class="blogPost notifications">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 center-col">
+        <h1>Notifications</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12" *ngFor="let n of notifications">
+        <app-single-notification [notification]="n"></app-single-notification>
+      </div>
+    </div>
+  </div>
+</section>

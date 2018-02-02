@@ -1,0 +1,13 @@
+<div class="container">
+  <h2>Let us know your location.</h2>
+  <p>Please write your street and city in order to get your location correctly.</p>
+  <div class="form-group">
+    <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+  </div>
+  <agm-map  [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom" >
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
+  <div class="text-center">
+    <button type="button" class="btn btn-default btn-lg" (click)="useThisLocation()"  style="margin-top: 15px;">Use this location</button>
+  </div>
+</div>
