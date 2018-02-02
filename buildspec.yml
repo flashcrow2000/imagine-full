@@ -1,0 +1,20 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      # needed for latest awscli
+      - echo "executing install commands"
+      - npm install -g @angular/cli
+  pre_build:
+    commands:
+      - echo "executing pre_build commands"
+  build:
+    commands:
+      - echo "executing build commands"
+      - echo "use your angular cli to build the app"
+      #- cd src/ng5IoTDashboard; npm install; ng build --prod; cd ../..
+  post_build:
+    commands:
+      - echo "executing post_build commands"
+      #- aws s3 sync --acl public-read --sse --delete src/ng5IoTDashboard/dist/ s3://$STATIC_WEBSITE_BUCKET
+      #- aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION --paths '/*'
