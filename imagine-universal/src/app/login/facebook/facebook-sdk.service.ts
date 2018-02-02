@@ -1,5 +1,5 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { PLATFORM_ID, Inject, Injectable } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { Observable } from 'rxjs/Observable';
 import { Observer, NextObserver } from 'rxjs/Observer';
@@ -16,33 +16,42 @@ export class FacebookSdkService  {
     fbLoginStatus = "";
     response: FacebookAuthResponse;
     fbUser: FbUser;
-    shareObservable:Observable<string>;
+    shareObservable: Observable<string>;
     // private FB: any;
-    constructor() {
-        FB.init({
+    constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+      try {
+        if (isPlatformBrowser(this.platformId)) {
+          FB.init({
             appId: '444142169287978',
             cookie: true,  // enable cookies to allow the server to access
             status: true,                    // the session
             xfbml: true,
-              // parse social plugins on this page
+            // parse social plugins on this page
             version: 'v2.8' // use graph api version 2.8
-        });
+          });
+        }
+      } catch (e) {
+        console.log('FB not availabe:', e);
+      }
     }
 
-    facebookLogin() : Observable<FacebookAuthResponse> {
+    facebookLogin(): Observable<FacebookAuthResponse> {
         return Observable.create((observer: NextObserver<FacebookAuthResponse>) => {
-
+          if (isPlatformBrowser(this.platformId)) {
             FB.login((response: FacebookAuthResponse) => {
-                // add logic to store user in localstorage
-                this.response = response;
-                this.fbLoginStatus = response.status;
-                observer.next(this.response);
-                observer.complete();
+              // add logic to store user in localstorage
+              this.response = response;
+              this.fbLoginStatus = response.status;
+              observer.next(this.response);
+              observer.complete();
             });
+          } else {
+            observer.error('Running on server');
+          }
         });
     }
 
-    facebookLogout() : Observable<FacebookAuthResponse> {
+    facebookLogout(): Observable<FacebookAuthResponse> {
         return Observable.create((observer: NextObserver<FacebookAuthResponse>) => {
 
             FB.logout((response: FacebookAuthResponse) => {
@@ -89,13 +98,16 @@ export class FacebookSdkService  {
 
     me() : Observable<FbUser> {
         return Observable.create((observer: NextObserver<FbUser>) => {
-
-            FB.api('/me?fields=id,first_name,last_name,email', (response:any) => {
-                console.log('fb response:', response);
-                this.fbUser = response;
-                observer.next(this.fbUser);
-                observer.complete();
+          if (isPlatformBrowser(this.platformId)) {
+            FB.api('/me?fields=id,first_name,last_name,email', (response: any) => {
+              console.log('fb response:', response);
+              this.fbUser = response;
+              observer.next(this.fbUser);
+              observer.complete();
             });
+          } else {
+            observer.error('Running on server');
+          }
 
         });
     }

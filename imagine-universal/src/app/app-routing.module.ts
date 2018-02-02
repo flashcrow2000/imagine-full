@@ -22,8 +22,11 @@ import {InspiringIdeasComponent} from "./page/inspiring-ideas/inspiring-ideas.co
 import {IdeaByUserComponent} from "./ideas/idea-by-user/idea-by-user.component";
 import {JoinedComponent} from "./ideas/joined/joined.component";
 import {ForgotComponent} from "./user/forgot/forgot.component";
+import {RebuildTagsComponent} from "./page/rebuild-tags/rebuild-tags.component";
 
 const appRoutes:Routes = [
+
+  {path: 'refreshtags', component: RebuildTagsComponent, pathMatch: 'full'},
 
   {path: 'imagine', component: ImagineDetailsComponent},
   {path: 'contribute', component: ContributeComponent},

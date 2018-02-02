@@ -30,8 +30,8 @@ import { UserService } from './services/user.service';
 import { AuthenticationService } from './login/classic/authentication.service';
 import { IdeaService } from './services/ideas.service';
 import { JwtService } from './services/jwt.service';
-import {HashtagsService} from "./services/hashtags.service";
-import {RedirectService} from "./services/redirect.service";
+import {HashtagsService} from './services/hashtags.service';
+import {RedirectService} from './services/redirect.service';
 /// Other
 
 import { AuthGuard } from './guards/auth-guard.service';
@@ -41,24 +41,26 @@ import { NotfoundComponent } from './page/notfound/notfound.component';
 import { ReCaptchaModule } from 'angular2-recaptcha';
 
 // google places
-import { AgmCoreModule } from "@agm/core";
+import { AgmCoreModule } from '@agm/core';
 import { NewIdeaComponent } from './ideas/new-idea/new-idea.component';
 import { FooterComponent } from './page/footer/footer.component';
-import { NotificationsService } from "./services/notifications.service";
+import { NotificationsService } from './services/notifications.service';
 import { CommentsComponent } from './comments/comments/comments.component';
 import { FaqComponent } from './page/faq/faq.component';
 import { PrivacyComponent } from './page/privacy/privacy.component';
 import { PopularComponent } from './ideas/popular/popular.component';
-import { BsDropdownModule } from "ngx-bootstrap";
+import { BsDropdownModule } from 'ngx-bootstrap';
 import { ProfileHomeComponent } from './user/profile/profile-home/profile-home.component';
 import { ProfileNotificationsComponent } from './user/profile/profile-notifications/profile-notifications.component';
 import { SingleNotificationComponent } from './notifications/single-notification/single-notification.component';
 import { InspiringIdeasComponent } from './page/inspiring-ideas/inspiring-ideas.component';
 import { IdeaByUserComponent } from './ideas/idea-by-user/idea-by-user.component';
 import { JoinedComponent } from './ideas/joined/joined.component';
-import {ClickOutsideModule} from "ng-click-outside";
-import {RlTagInputModule} from "./modules/angular2-tag-input/tag-input.module";
+import {ClickOutsideModule} from 'ng-click-outside';
+import {RlTagInputModule} from './modules/angular2-tag-input/tag-input.module';
 import { ForgotComponent } from './user/forgot/forgot.component';
+import {RebuildTagsComponent} from "./page/rebuild-tags/rebuild-tags.component";
+// import {TagInputComponent} from "./modules/angular2-tag-input/components/tag-input/tag-input.component";
 
 
 @NgModule({
@@ -94,20 +96,22 @@ import { ForgotComponent } from './user/forgot/forgot.component';
     InspiringIdeasComponent,
     IdeaByUserComponent,
     JoinedComponent,
-    ForgotComponent
+    ForgotComponent,
+    RebuildTagsComponent
   ],
   imports: [
     BsDropdownModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyA8NoSd_Eh1P1M5TNGlEK76Qi7skKg0qlg",
-      libraries: ["places"]
+      apiKey: 'AIzaSyA8NoSd_Eh1P1M5TNGlEK76Qi7skKg0qlg',
+      libraries: ['places']
     }),
     ClickOutsideModule,
-    RlTagInputModule,
-    BrowserModule,
+//    RlTagInputModule,
+    BrowserModule.withServerTransition({appId: 'imagineallthepeople'}),
     ReCaptchaModule,
     FormsModule,
     ReactiveFormsModule,
+    RlTagInputModule,
     HttpModule,
     AppRoutingModule
   ],

@@ -1,4 +1,6 @@
-﻿import { Injectable } from '@angular/core';
+﻿import {PLATFORM_ID, Inject, Injectable} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Router } from '@angular/router';
 
@@ -25,12 +27,13 @@ export class UserService {
     fbAuth:FacebookAuthResponse;
     tempBuffer:string;
 
-    constructor(private http: Http,
+    constructor(@Inject(PLATFORM_ID) private platformId: Object,
+                private http: Http,
                 private config: AppConfig,
                 private router: Router,
                 private jwt: JwtService,
-                private notifService:NotificationsService,
-                private ideaService:IdeaService,
+                private notifService: NotificationsService,
+                private ideaService: IdeaService,
                 private fbSDK: FacebookSdkService) {
       this.getCurrentUser();
     }
@@ -105,6 +108,9 @@ export class UserService {
     }
 
     getCurrentUser() {
+      if (!isPlatformBrowser(this.platformId)) {
+        return null;
+      }
       let ls = (localStorage.getItem('currentUser'));
       console.log('current user:', this.currentUser);
       console.log('from local storage:', ls);

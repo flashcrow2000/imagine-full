@@ -1,9 +1,10 @@
 
 import {
-  AfterViewInit,
-  ApplicationRef, ChangeDetectorRef, Component, DoCheck, ElementRef, KeyValueDiffers, OnInit,
+  AfterViewInit, PLATFORM_ID, Inject, ElementRef, KeyValueDiffers,
+  ApplicationRef, ChangeDetectorRef, Component, DoCheck, OnInit,
   SecurityContext, ViewChild
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IdeaService} from '../../services/ideas.service';
 import {Idea} from "../../shared/idea.model";
@@ -20,7 +21,7 @@ import {FacebookSdkService} from "../../login/facebook/facebook-sdk.service";
 })
 export class IdeaDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('el')
-    target:ElementRef;
+    target: ElementRef;
 
   selectedIdea:  Idea = new Idea();
   loading: boolean = false;
@@ -34,8 +35,11 @@ export class IdeaDetailComponent implements OnInit, AfterViewInit {
   userName:string;
   userIdeasURL:string
   html:any;
+  isServerSide = false;
+  pageURL = '';
 
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+              private activatedRoute: ActivatedRoute,
               private userService: UserService,
               private ideaService: IdeaService,
               private config: AppConfig,
@@ -48,11 +52,17 @@ export class IdeaDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isServerSide = true;
+    }
+    this.pageURL = "https://imaginallthepeople.world"+this.router.url;
     this.ideaService.getIdeaById(this.activatedRoute.snapshot.params.id).subscribe(
       data => {
         //console.log(data['_body']);
         this.selectedIdea = this.ideaService.convertDbItemToIdea(JSON.parse(data['_body'])[0], true);
-        if (this.userService.getCurrentUser()._id == this.selectedIdea.user_id) {
+        if (isPlatformBrowser(this.platformId) &&
+          (this.userService.getCurrentUser() !== undefined) &&
+          (this.userService.getCurrentUser()._id == this.selectedIdea.user_id)) {
           this.ownIdea = true;
           this.changeDetector.detectChanges()
         }
@@ -66,20 +76,21 @@ export class IdeaDetailComponent implements OnInit, AfterViewInit {
         this.imageURL = this.selectedIdea.imgType ?
           this.compileImageData(this.selectedIdea.imgType, this.selectedIdea.imgBuffer) :
           this.selectedIdea.imgURL;
-        this.userService.getUsernameById(this.selectedIdea.user_id)
-          .subscribe(
-            data => {
-              if (data.firstName || data.lastName) {
-                this.userName = (data.firstName ? data.firstName : '') + (data.lastName ? ' '+data.lastName : '');
-              } else {
-                this.userName = 'Anonymous';
+        if (isPlatformBrowser(this.platformId)) {
+          this.userService.getUsernameById(this.selectedIdea.user_id)
+            .subscribe(
+              data => {
+                if (data.firstName || data.lastName) {
+                  this.userName = (data.firstName ? data.firstName : '') + (data.lastName ? ' ' + data.lastName : '');
+                } else {
+                  this.userName = 'Anonymous';
+                }
+                this.changeDetector.detectChanges();
+              },
+              error => {
               }
-              this.changeDetector.detectChanges();
-            },
-            error => {
-            }
-          );
-
+            );
+        }
       },
       error => {
       }

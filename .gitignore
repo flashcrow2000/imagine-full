@@ -1,2 +1,4 @@
 imagine-server/node_modules
 .editorconfig
+imagine-universal/dist-server
+imagine-universal/temp

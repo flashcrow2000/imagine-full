@@ -18,7 +18,7 @@ export class HashtagsService {
     return this.http.post(this.config.apiUrl+'/tags/all', {}, this.jwt.getJWT());
   }
 
-  updateHashtag(ht:Hashtag) {
+  updateHashtag(ht: Hashtag) {
     // let index:number = this.hashtags.indexOf(ht);
     // let exists:boolean = false;
     // if (index > -1) {
@@ -27,7 +27,7 @@ export class HashtagsService {
     // }
     //
     // if (exists) {
-      return this.http.post(this.config.apiUrl+'/tags/update', {tags:ht}, this.jwt.getJWT());
+      return this.http.post(this.config.apiUrl+'/tags/update', {tag: ht}, this.jwt.getJWT());
     // } else {
     //   return this.http.post(this.config.apiUrl+'/tags/add', ht, this.jwt.getJWT());
     // }
@@ -46,5 +46,10 @@ export class HashtagsService {
     }
 
     return result;
+  }
+
+  resetTags(tags: Hashtag[]) {
+    console.log('call rest tags');
+    return this.http.post(this.config.apiUrl+'/tags/reset', {tags:tags});
   }
 }

@@ -1,4 +1,5 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { PLATFORM_ID, Inject, Injectable } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map'
 
@@ -7,7 +8,8 @@ import {UserService } from '../../services/user.service'
 
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: Http,
+    constructor(@Inject(PLATFORM_ID) private platformId: Object,
+                private http: Http,
                 private config: AppConfig,
                 private userService:UserService) { }
 
@@ -20,8 +22,9 @@ export class AuthenticationService {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     this.userService.loginType = 'classic';
                     this.userService.currentUser = user;
-                  console.log('localstorage 2');
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    if (isPlatformBrowser(this.platformId)) {
+                      localStorage.setItem('currentUser', JSON.stringify(user));
+                    }
                     this.userService.userActivated.next(true);
                 }
             });

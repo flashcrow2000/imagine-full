@@ -33,6 +33,14 @@
   <script src="assets/js/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="assets/plugin/bootstrap/js/bootstrap.min.js"></script>
+  <script>
+    if (location.href.indexOf('localhost') == -1) {
+      if (location.protocol != 'https:') {
+        location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+      }
+    }
+
+  </script>
 </head>
 <body class="inner">
   <app-root>Loading...</app-root>

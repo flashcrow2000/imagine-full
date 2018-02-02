@@ -100,7 +100,8 @@
           </span>
           <span *ngIf="imageNeeded" style="color:red">Upload an image, or choose a default one!</span>
           <div class="text-center">
-            <button type="button" class="btn btn-default btn-lg" (click)="resetForm()">Reset</button>
+            <button *ngIf="!updateIdea" type="button" class="btn btn-default btn-lg" (click)="resetForm()">Reset form</button>
+            <button *ngIf="updateIdea" type="button" class="btn btn-default btn-lg" (click)="deleteIdea()">Delete Idea</button>
             <button *ngIf="!updateIdea" type="submit" #addBtn class="btn btn-default btn-lg">Add Idea</button>
             <button *ngIf="updateIdea" type="submit" #addBtn class="btn btn-default btn-lg">Update Idea</button>
             <!--<button class="btn btn-primary" type="button" (click)="prePopulate()">Pre populate</button>-->

@@ -32,6 +32,15 @@ export class IdeaService {
     return this.http.post(this.config.apiUrl+'/ideas/fromUser', {id:userId}, this.jwt.getJWT());
   }
 
+  /*
+  to be removed
+   */
+
+  getTagsFromIdeas(): Observable<any> {
+    console.log('get tags');
+    return this.http.get(this.config.apiUrl + '/ideas/hashtags');
+  }
+
   getLatestIdeas(sortBy:string, count:number=20) {
     return this.http.post(this.config.apiUrl+'/ideas/latest', {sort:sortBy, count:count}, this.jwt.getJWT());
   }
@@ -70,6 +79,11 @@ export class IdeaService {
 
   updateIdea(tIdea:Idea) {
     return this.http.put(this.config.apiUrl + '/ideas/' + tIdea._id, tIdea, this.jwt.getJWT());
+  }
+
+  deleteIdea(id:string) {
+    console.log('delete with id:', id);
+    return this.http.post(this.config.apiUrl+'/ideas/delete', {_id:id}, this.jwt.getJWT());
   }
 
   addFollowerToIdea(ideaId, userId) {

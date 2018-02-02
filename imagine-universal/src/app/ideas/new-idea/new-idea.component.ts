@@ -98,7 +98,7 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
                 this.tagsService.parseTags(jsondata))
 
           this.showTagsInput = true;
-          this.ideaHashtags = this.editIdea.hashtags;
+          this.ideaHashtags = this.editIdea ?  this.editIdea.hashtags : [];
           this.ref.detectChanges();
           this.refreshInterval = setInterval(() => this.ref.detectChanges(), 100);
 
@@ -142,11 +142,6 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
     // TODO | Seems that direct update and add doesn't work,
     // TODO | so for now just update existing tags, and add new ones
     // TODO | !also add them to the service list!
-    this.tagsService.updateHashtag(this.ideaHashtags).
-      subscribe(
-        data => console.log('data after bulk:', data),
-      error => console.log('error after bulk:', error)
-    );
     let valid = true;
     let newIdea:Idea = new Idea();
     if (this.newIdeaForm.get('typeSelect').value == '-') {
@@ -161,10 +156,12 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
     newIdea.description = this.newIdeaForm.get('description').value;
     newIdea.typeSelectId = this.newIdeaForm.get('typeSelect').value;
     newIdea.user_id = this.currentUser._id;
-//    if (this.newIdeaForm.get('hashtags').value) {
-//      newIdea.hashtags = this.newIdeaForm.get('hashtags').value.split(' ');
-//    }
-    newIdea.hashtags = this.ideaHashtags;
+    //if (this.newIdeaForm.get('hashtags').value) {
+    //  newIdea.hashtags = this.newIdeaForm.get('hashtags').value.split(' ');
+    //}
+    console.log(this.ideaHashtags);
+    //newIdea.hashtags = this.ideaHashtags.join('|').split('#').join().split('|');
+
     newIdea.location_lat = this.currentUser.location_lat;
     newIdea.location_long =  this.currentUser.location_long;
     newIdea.location_label =  this.currentUser.location_label;
@@ -207,6 +204,9 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
       }
 
       newIdea._id = this.editIdea._id;
+
+      // TODO if hashtags are different, remove old tags and add new ones
+
       this.ideaService.updateIdea(newIdea).subscribe(
         data => {
           console.log('data after idea update:', data);
@@ -253,8 +253,25 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
         error => {
         }
       );
+      console.log('tags:')
+      for (let k in this.ideaHashtags) {
+        //console.log(this.ideaHashtags[k]);
+        this.tagsService.updateHashtag(this.ideaHashtags[k])
+           .subscribe(
+             data => console.log('data after update:', data),
+             error => console.log('error after update:', error)
+           );
+      }
     }
 
+  }
+
+  deleteIdea() {
+    this.ideaService.deleteIdea(this.editIdea._id)
+      .subscribe(
+        data => {console.log('success after delete', data)},
+        error => {console.log('error after delete', error)}
+      )
   }
 
   afterIdeaAdded(res:string) {
