@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Sign up | Imagine </title>
+
+        <!-- Bootstrap -->
+        <link href="assets/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/plugin/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="assets/css/responsive.css" rel="stylesheet">
+        <link rel="icon" type="image/png" href="assets/images/feb.png" />
+
+        <link href="https://fonts.googleapis.com/css?family=Gochi+Hand" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body class="inner">
+
+        <section class="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5 center-col">
+                        <h1>Sign Up</h1>
+                        <form action="" method="POST" accept-charset="utf-8" class="">
+                            <div class="form-group has-feedback">
+                                <label for="email">Your Email: </label>
+                                <input type="email" id="email" name="email" value="" class="form-control" placeholder="&#xf0e0; Email">
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                <span id="emailStatus" class="sr-only">(error)</span>
+                                <div class="form-control-feedback message">
+                                    <p>This email has already been registered.</p>
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label for="password">Password: </label>
+                                <input type="password" id="password" name="password" value="" class="form-control" placeholder="&#xf023; Password">
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                <span id="passwordStatus" class="sr-only">(success)</span>
+                                <div class="form-control-feedback message">
+                                    <p>Good password!</p>
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label for="repassword">Repeat password: </label>
+                                <input type="password" id="repassword" name="repassword" value="" class="form-control" placeholder="&#xf023; Repeat password">
+                                <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+                                <span id="repasswordStatus" class="sr-only">(warning)</span>
+                                <div class="form-control-feedback message">
+                                    <p>Not the same password</p>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default form-control">Register</button>
+                            <p>By clicking register, you agree to all the terms and conditions of Imagine.</p>
+                            <p>Already have an account? <a href="#" title="Log In">Log in</a></p>
+                            
+                        </form>
+                    </div>
+                
+                </div>
+            </div>
+        </section>
+        <section class="privacy">
+            <div class="container">
+                <div class="row navber-custom">
+                    <ul class="nav navbar-nav navbar-right left-custom-left faqs">
+                            <li><a href="faqs.html">FAQs</a></li>
+                            <li><a href="privacy.html">Privacy</a></li>
+                        </ul>
+                </div>
+            </div>
+
+
+        </section>
+        <footer>
+            <div class="container">
+                <div class="col-sm-12">
+                    <div class="top-fotter"></div>
+                    <div class="bottom-footer">
+                        <div class="clearfix padding-20">
+                            <p class="text-center">2017 &copy; Imagine all the people <br>Powered by <a href="http://www.iwith.org" title="iWith.org: Web development for the non-profit world *">iWith.org</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="assets/js/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="assets/plugin/bootstrap/js/bootstrap.min.js"></script>
+        <script>
+        // This is just an example of the class needed to add. The options are .has-success, .has-warning and .has-error. Each input has an example of each outcome
+            $("form .form-group").click(function() {
+                $(this).toggleClass("has-error");
+            });
+        </script>
+    </body>
+</html>
