@@ -1,5 +1,13 @@
-FROM nginx
+FROM node:boron
 
-COPY dist /usr/share/nginx/html
+COPY dist /usr/html/dist
+COPY dist-server /usr/html/dist-server
+COPY server.js /usr/html
+COPY package.json /usr/html
 
-EXPOSE 80
+WORKDIR /usr/html
+RUN npm install
+RUN npm run postinstall
+
+EXPOSE 3000
+CMD ["node" , "server.js"]
