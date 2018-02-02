@@ -8,13 +8,14 @@ phases:
   pre_build:
     commands:
       - echo "executing pre_build commands"
+      - cd imagine-universal; npm install; npm run build:ssr
   build:
     commands:
       - echo "executing build commands"
-      - echo "use your angular cli to build the app"
-      #- cd src/ng5IoTDashboard; npm install; ng build --prod; cd ../..
+      - docker-compose build
   post_build:
     commands:
       - echo "executing post_build commands"
+      - docker-compose push
       #- aws s3 sync --acl public-read --sse --delete src/ng5IoTDashboard/dist/ s3://$STATIC_WEBSITE_BUCKET
       #- aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION --paths '/*'
