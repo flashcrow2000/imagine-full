@@ -70,7 +70,6 @@ export class UserService {
             case 'facebook':
                 this.fbSDK.facebookLogout().subscribe(
                       fbAuth => {
-                          console.log('on logout', fbAuth);
                       }
                 )
                 break;
@@ -83,7 +82,6 @@ export class UserService {
                 break;
 
         }
-      console.log('localstorage should remove');
       //localStorage.setItem('currentUser', '{}');
       //localStorage.removeItem('currentUser');
       //localStorage.clear();
@@ -112,8 +110,6 @@ export class UserService {
         return null;
       }
       let ls = (localStorage.getItem('currentUser'));
-      console.log('current user:', this.currentUser);
-      console.log('from local storage:', ls);
       if (ls && !this.currentUser) {
         this.currentUser = this.convertDBUserToImagine(JSON.parse(ls), true);
         this.loginType = this.currentUser.fb_user_id ? 'facebook' : 'classic';
@@ -165,12 +161,8 @@ export class UserService {
             data => {
               this.updateLocalUser(this.currentUser);
               this.notifService.addNotification(id, this.currentUser._id ).subscribe(
-                data => {console.log('data on addNotification', data)},
-                error => {console.log('error on addNotification', error)}
               );
               this.ideaService.addFollowerToIdea(id, this.currentUser._id).subscribe(
-                data => {console.log('data after addFollower:', data)},
-                error => {console.log('error after addFollower:', error)}
               )
             }
           );
@@ -201,7 +193,6 @@ export class UserService {
     }
 */
     updateUserLocation(lat:number, long:number, label:string) {
-        //console.log('bingo!', (this.currentUser !== undefined))
         if (this.currentUser !== undefined) {
             this.currentUser.location_label = label;
             this.currentUser.location_lat = ''+lat;
@@ -214,7 +205,6 @@ export class UserService {
                     this.router.navigate(['/profile']);
                 },
                 error => {
-                    console.log('update error:', error._body);
                 });
         }
     }
@@ -224,7 +214,6 @@ export class UserService {
       if (!this.currentUser.imgBuffer) {
         this.currentUser.imgBuffer = this.tempBuffer;
       }
-      console.log('localstorage 5');
       localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
       this.userInfoChanged.next(this.currentUser);
     }
@@ -237,7 +226,6 @@ export class UserService {
     updateImageData(imgType, imgData) {
       this.currentUser.imgType = imgType;
       this.currentUser.imgBuffer = imgData;
-      console.log('localstorage 6');
       localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
     }
 }

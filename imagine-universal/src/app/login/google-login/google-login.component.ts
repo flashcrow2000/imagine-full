@@ -55,26 +55,21 @@ export class GoogleLoginComponent {
     this.userService.create(tUser)
         .subscribe(
           data => {
-              console.log('Google register success');
               this.onGoogleLoginSuccess(tUser);
               this.router.navigate(['/ideas']);
           },
           error => {
-              console.log('Google register error:', error._body);
               if (error._body.indexOf('already taken') > -1) {
-                console.log('Google account already connected')
                 this.onGoogleLoginSuccess(tUser);
                 this.router.navigate(['/ideas']);
               } else {
                 //this.loading = false;
               }
           });
-    console.log('google user:', tUser);
     */
   }
 
   onGoogleLoginSuccess(user:User) {
-    console.log('user logged in');
     this.userService.loginType = 'google';
     this.userService.userActivated.next(true);
     this.userService.currentUser = user;
@@ -82,12 +77,11 @@ export class GoogleLoginComponent {
   }
 
   onLoginError(error) {
-    console.log(error);
+    console.log('on login error:', error);
   }
   onGoogleLogout() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-      console.log('G User signed out.');
     });
   }
 G }

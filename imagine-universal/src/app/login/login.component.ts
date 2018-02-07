@@ -62,11 +62,9 @@ export class LoginComponent implements OnInit {
       this.authenticationService.login(this.model.username, this.model.password)
           .subscribe(
               data => {
-                console.log('data after login:', data);
                 this.navigateToRedirect();
               },
               error => {
-                console.log('login error:', error._body);
                 this.userService.userActivated.next(false);
                 this.loading = false;
                 this.invalidCreds = true;
@@ -81,7 +79,6 @@ export class LoginComponent implements OnInit {
     this.facebookSdkService.facebookLogin().subscribe(
       fb_auth_resp => {
         this.fbAuthResponse = fb_auth_resp;
-        console.log('response:', this.fbAuthResponse);
         this.fbRespString = JSON.stringify(this.fbAuthResponse);
         this.fbLoginStatus = this.facebookSdkService.fbLoginStatus;
 
@@ -101,12 +98,10 @@ export class LoginComponent implements OnInit {
                   this.userService.create(imagineUser)
                     .subscribe(
                       data => {
-                        console.log('FB register success:', data);
                         let tempJson:any = JSON.parse(data["_body"]);
                         // pass 'true' so that we copy all the information from the database over to
                         // the user object
                         imagineUser = this.userService.convertDBUserToImagine(tempJson, true);
-                        console.log('user logged in', imagineUser);
                         //imagineUser.token = JSON.parse(data["_body"]).token;
                         //imagineUser._id = JSON.parse(data["_body"])._id;
                         this.onFBLoginSuccess(imagineUser);
@@ -114,7 +109,6 @@ export class LoginComponent implements OnInit {
 
                       },
                       error => {
-                        console.log('FB register error:', error._body);
                         if (error._body.indexOf('already taken') > -1) {
                           // Fetch the user from database, and use that instead
                           // so we don't lose the information already stored
@@ -165,12 +159,10 @@ export class LoginComponent implements OnInit {
       this.userService.forgotPassword(val)
         .subscribe(
           data => {
-            console.log('data after forgot pass:', data);
             this.forgotPassword = false;
             this.forgotPasswordSuccess = true;
           },
           error => {
-            console.log('error after forgot pass:', error);
             this.forgotPassword = false;
             this.forgotPasswordError = true;
           }
@@ -185,14 +177,12 @@ export class LoginComponent implements OnInit {
   navigateToRedirect() {
     let redirectURL = this.redirect.getRedirect() ? this.redirect.getRedirect() : '/';
     this.redirect.resetRedirectURL();
-    console.log('redirect to ', redirectURL);
     this.router.navigate([redirectURL ? redirectURL : '/'])
   }
 
   onFBLoginSuccess(user:User) {
     this.userService.loginType = 'facebook';
     this.userService.currentUser = user;
-    console.log('localstorage 1');
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.userService.userActivated.next(true);
   }

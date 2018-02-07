@@ -23,16 +23,13 @@ export class ProfileNotificationsComponent implements OnInit {
     this.notifService.getNotificationsForUser(this.currentUser._id)
       .subscribe(
         data => {
-          console.log('notifications result:', data);
           let res = JSON.parse(data['_body']).notifications;
 
           this.notifications = this.parseNotifications(res);
-          console.log('notificationsCount:', this.notifications);
           this.notifService.notificationsUpdate.next(0);
           this.ref.detectChanges();
         },
         error => {
-          console.log('notificationsCount error:', error);
         }
       )
   }

@@ -63,7 +63,6 @@ function saveNewIdea(ideaParams) {
 		if (ideaData.hashtags == undefined) {
 			ideaData.hashtags = [];
 		}
-		console.log(ideaData);
 		db.ideas.insert(
 			ideaData, 
 			function(err, doc) {

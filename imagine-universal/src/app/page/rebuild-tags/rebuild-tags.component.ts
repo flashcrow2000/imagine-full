@@ -17,13 +17,10 @@ export class RebuildTagsComponent implements OnInit {
   }
 
   onRefreshTags() {
-    console.log('refresh tags call')
     this.ideaService.getTagsFromIdeas()
       .subscribe(
         data => {
-          console.log('data -> ', data);
           const tags = data.json().ideas.reduce((res, curr) =>{
-            console.log(curr.hashtags);
             res.concat(curr.hashtags)
           }, []);
           this.convertToHashtags(tags);

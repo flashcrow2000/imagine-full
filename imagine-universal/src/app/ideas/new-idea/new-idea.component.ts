@@ -71,7 +71,6 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentUser = this.userService.getCurrentUser();
-    console.log('current user:', this.currentUser);
     if (!this.currentUser.fb_first_name) {
       this.requestUsername = true;
     }
@@ -132,7 +131,6 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
       this.currentUser.fb_last_name = arr.slice(1,arr.length).join(' ');
       this.currentUser.fb_first_name = arr[0];
     }
-    console.log('current user after username:', this.currentUser);
     this.userService.update(this.currentUser).subscribe(
         data => {
             this.userService.updateLocalUser(this.currentUser);
@@ -190,7 +188,6 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
     //if (this.newIdeaForm.get('hashtags').value) {
     //  newIdea.hashtags = this.newIdeaForm.get('hashtags').value.split(' ');
     //}
-    console.log(this.ideaHashtags);
     //newIdea.hashtags = this.ideaHashtags.join('|').split('#').join().split('|');
 
     newIdea.location_lat = this.currentUser.location_lat;
@@ -202,7 +199,6 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
     }*/
     let bypassUpload:boolean = false;
     let index = '';
-    console.log('file uploaded:', this.fileUploadEl.nativeElement.files.item(0));
     if(this.fileUploadEl.nativeElement.files.item(0) === null) {
       if (!(this.img1Selected || this.img2Selected || this.img3Selected)) {
         if (!this.editIdea) {
@@ -229,7 +225,6 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
         newIdea.imgURL = null;
       } else {
         newIdea.imgURL = newIdea.imgURL || this.editIdea.imgURL;
-        console.log('newIdea imgURL:', newIdea.imgURL);
         newIdea.imgType   = newIdea.imgURL ? '' : newIdea.imgType || this.editIdea.imgType;
         newIdea.imgBuffer = newIdea.imgURL ? '' : newIdea.imgBuffer || this.editIdea.imgBuffer;
       }
@@ -240,7 +235,6 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
 
       this.ideaService.updateIdea(newIdea).subscribe(
         data => {
-          console.log('data after idea update:', data);
           if(this.fileUploadEl.nativeElement.files.item(0) !== null) {
             let fd: FormData = new FormData();
             fd.append('photo', this.fileUploadEl.nativeElement.files.item(0));
@@ -257,7 +251,9 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
             this.afterIdeaAdded(newIdea._id);
           }
         },
-        error => {console.log('error after idea update:', error)}
+        error => {
+          console.log('error after idea update:', error)
+        }
       )
     } else {
       this.ideaService.saveIdea(newIdea).subscribe(
@@ -265,7 +261,6 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
           let res: string = JSON.parse(data['_body']).ops[0]._id;
           // idea created, now update with the image
           if (!bypassUpload) {
-            console.log('send image to server')
             let fd: FormData = new FormData();
             fd.append('photo', this.fileUploadEl.nativeElement.files.item(0));
             fd.append('ideaId', res);
@@ -284,9 +279,7 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
         error => {
         }
       );
-      console.log('tags:')
       for (let k in this.ideaHashtags) {
-        //console.log(this.ideaHashtags[k]);
         this.tagsService.updateHashtag(this.ideaHashtags[k])
            .subscribe(
              data => console.log('data after update:', data),

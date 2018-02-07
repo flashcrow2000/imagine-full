@@ -49,7 +49,6 @@ export class HashtagsService {
   }
 
   resetTags(tags: Hashtag[]) {
-    console.log('call rest tags');
     return this.http.post(this.config.apiUrl+'/tags/reset', {tags:tags});
   }
 }

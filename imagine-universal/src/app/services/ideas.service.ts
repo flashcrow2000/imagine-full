@@ -22,13 +22,10 @@ export class IdeaService {
               private jwt: JwtService) {}
 
   saveIdea(idea:Idea) {
-    console.log('posting idea to server:', idea);
-    console.log('post to:', (this.config.apiUrl+'/ideas/new'));
     return this.http.post(this.config.apiUrl+'/ideas/new', idea, this.jwt.getJWT());
   }
 
   getIdeasByUser(userId:string):Observable<any> {
-    console.log('get ideas by ', userId);
     return this.http.post(this.config.apiUrl+'/ideas/fromUser', {id:userId}, this.jwt.getJWT());
   }
 
@@ -37,7 +34,6 @@ export class IdeaService {
    */
 
   getTagsFromIdeas(): Observable<any> {
-    console.log('get tags');
     return this.http.get(this.config.apiUrl + '/ideas/hashtags');
   }
 
@@ -82,7 +78,6 @@ export class IdeaService {
   }
 
   deleteIdea(id:string) {
-    console.log('delete with id:', id);
     return this.http.post(this.config.apiUrl+'/ideas/delete', {_id:id}, this.jwt.getJWT());
   }
 
@@ -100,10 +95,8 @@ export class IdeaService {
       if (!tIdea[k] || override) {
         tIdea[k] = data[k];
       } else {
-        //console.log('typeof k:', typeof tIdea[k]);
       }
     }
-    console.log('after convert:', tIdea)
     return tIdea;
   }
 

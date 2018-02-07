@@ -28,9 +28,7 @@ export class ProfileHomeComponent implements OnInit {
     this.currentUser = this.userService.getCurrentUser();
     this.myIdeasURL = '/ideasBy/'+this.currentUser._id;
     if (!this.currentUser.email) {
-      console.log('no email')
       if (this.emailValidator(this.currentUser.username)) {
-        console.log('username is email')
         this.currentUser.email = this.currentUser.username;
         this.requestEmail = false;
         this.userService.update(this.currentUser);
@@ -47,18 +45,17 @@ export class ProfileHomeComponent implements OnInit {
           let temp:Idea[] = this.ideaService.parseIdeas(ideas);
           if (temp.length > 0) {
             this.ideas = temp.sort((i1: Idea, i2: Idea) => {
-              //console.log(i2.followersTotal, '-', i2.followersTotal);
               return i2.followersTotal - i1.followersTotal
             });
           }
-          console.log('ideas', this.ideas);
           if (this.ideas.length > 4) {
             this.showMoreIdeasVisible = true;
           }
           this.ref.detectChanges();
           this.ideasLoaded = true;
         },
-        error => { console.log(error)}
+        error => {
+        }
       );
   }
 
