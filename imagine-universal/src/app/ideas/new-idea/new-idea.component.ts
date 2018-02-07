@@ -10,6 +10,7 @@ import { Idea } from '../../shared/idea.model';
 import {DOCUMENT} from "@angular/platform-browser";
 import {HashtagsService} from "../../services/hashtags.service";
 import {Hashtag} from "../../shared/hashtag.model";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -27,6 +28,7 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
     });
   @ViewChild('file') fileUploadEl:ElementRef;
   @ViewChild('addBtn') addBtnRef:ElementRef;
+  @ViewChild('username') username:ElementRef;
   //@ViewChild('tags') tags:ElementRef;
   ideaTypes = [
     {id:0, text:'No religion'},
@@ -55,11 +57,13 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
 
   ideaHashtags:any= [];
   updateIdea:boolean = false;
+  requestUsername:boolean = false;
 
   refreshInterval:any;
   editIdea:Idea = null;
   constructor(@Inject(DOCUMENT) private document:any,
               private userService:UserService,
+              private router: Router,
               private ref:ChangeDetectorRef,
               private tagsService: HashtagsService,
               private ideaService: IdeaService) {
@@ -67,6 +71,10 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentUser = this.userService.getCurrentUser();
+    console.log('current user:', this.currentUser);
+    if (!this.currentUser.fb_first_name) {
+      this.requestUsername = true;
+    }
     this.editIdea = this.ideaService.ideaForEdit;
     if (this.editIdea) {
       this.updateIdea = true;
@@ -115,6 +123,29 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
         //this.resetForm();
       }
     )
+  }
+
+  onUsernameAdded() {
+    this.currentUser.fb_first_name = this.username.nativeElement.value;
+    if (this.currentUser.fb_first_name.indexOf(' ')>-1) {
+      let arr = this.currentUser.fb_first_name.split(' ');
+      this.currentUser.fb_last_name = arr.slice(1,arr.length).join(' ');
+      this.currentUser.fb_first_name = arr[0];
+    }
+    console.log('current user after username:', this.currentUser);
+    this.userService.update(this.currentUser).subscribe(
+        data => {
+            this.userService.updateLocalUser(this.currentUser);
+        },
+        error => {
+
+        }
+    )
+    this.requestUsername = false;
+  }
+
+  onContinueWithout() {
+    this.router.navigate(['/ideas']);
   }
 
   ngOnDestroy() {
