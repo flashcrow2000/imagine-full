@@ -14,4 +14,4 @@ RUN npm run postinstall
 ADD startup.sh startup.sh
 
 EXPOSE 3000
-CMD ["startup.sh"]
+CMD ["bash", "startup.sh"]
