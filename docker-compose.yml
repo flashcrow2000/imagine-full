@@ -1,14 +1,14 @@
 version: "2"
 services:
   imagine-server:
-    image: 398088795386.dkr.ecr.eu-west-1.amazonaws.com/imagine/imagine-server:devel
+    image: 398088795386.dkr.ecr.eu-west-1.amazonaws.com/imagine/imagine-server:prod
     build: ./imagine-server/
     ports:
       - "4000:4000"
     links:
       - mongo
   imagine-universal:
-    image: 398088795386.dkr.ecr.eu-west-1.amazonaws.com/imagine/imagine-universal:devel
+    image: 398088795386.dkr.ecr.eu-west-1.amazonaws.com/imagine/imagine-universal:prod
     build: ./imagine-universal/
     ports:
       - "3000:3000"
