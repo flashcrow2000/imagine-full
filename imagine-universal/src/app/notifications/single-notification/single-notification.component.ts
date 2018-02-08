@@ -40,7 +40,6 @@ export class SingleNotificationComponent implements OnInit {
     this.userService.getUsernameById(this.notification.by_user_id)
       .subscribe(
         data => {
-          console.log('data after getusername:', data);
           this.userInfo = data;
           if (data.firstName || data.lastName) {
             this.userName = (data.firstName ? data.firstName : '') + (data.lastName ? ' '+data.lastName : '');
@@ -49,7 +48,6 @@ export class SingleNotificationComponent implements OnInit {
           }
         },
         error => {
-          console.log('error:', error);
         }
       );
     this.ideaService.getIdeaById(this.notification.target_id)
@@ -57,7 +55,6 @@ export class SingleNotificationComponent implements OnInit {
         data => {
           this.idea = new Idea();
           this.idea.parse(JSON.parse(data['_body'])[0]);
-          console.log('idea:', this.idea);
           this.totalFollowers = this.idea.followers ? this.idea.followers.length : 0;
           this.totalShares = this.idea.shares ? this.idea.shares : 0;
           this.ideaTitle= this.idea.title;
@@ -72,14 +69,12 @@ export class SingleNotificationComponent implements OnInit {
           }
         },
         error => {
-          console.log('error:', error)
         }
       )
 
   }
 
   compileImageData(type, data):string {
-    //console.log('compile image data from ', type, data.length);
     let result = "data:" + type + ";base64," + data;
     return result;
   }

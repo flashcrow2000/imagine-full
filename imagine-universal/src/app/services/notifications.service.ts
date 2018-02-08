@@ -25,7 +25,6 @@ export class NotificationsService {
   }
 
   getNotificationsForUser(userId:string, type:string='full') {
-    console.log('find notificationsCount for ', userId);
     return this.http.post(this.config.apiUrl+'/notif/forUser', {id:userId, type:type}, this.jwt.getJWT());
   }
 }

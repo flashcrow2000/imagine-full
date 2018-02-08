@@ -4,11 +4,9 @@ export class RedirectService {
 
   saveRedirect(url) {
     this.redirectURL = url;
-    console.log('store:', url);
   }
 
   getRedirect():string {
-    console.log('fetch:', this.redirectURL);
     return this.redirectURL;
   }
 

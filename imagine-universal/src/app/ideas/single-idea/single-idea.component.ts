@@ -35,7 +35,6 @@ export class SingleIdeaComponent implements OnInit, AfterViewInit {
               private router: Router) { }
 
   ngOnInit() {
-    //console.log(this.idea);
     if (this.userService.currentUser) {
       this.currentUser = this.userService.getCurrentUser();
       if (this.idea.user_id == this.currentUser._id) {
@@ -45,7 +44,6 @@ export class SingleIdeaComponent implements OnInit, AfterViewInit {
         this.joinedIdea = true;
       }
     }
-    //console.log(this.idea);
     if (this.idea.description.length > this.maxDescription) {
       //this.ideaDescription = this.idea.description.substr(0, this.maxDescription)+'...';
       this.ideaTruncated = true;
@@ -59,7 +57,6 @@ export class SingleIdeaComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     let s = document.createElement("script");
     s.type = "text/javascript";
-    console.log('tags created');
     s.src = 'assets/js/scripts.js';
     this.target.nativeElement.appendChild(s);
   }
@@ -75,7 +72,6 @@ export class SingleIdeaComponent implements OnInit, AfterViewInit {
   }
   // TODO move this to a service
   compileImageData(type, data):string {
-    //console.log('compile image data from ', type, data.length);
     let result = "data:" + type + ";base64," + data;
     return result;
   }
@@ -91,20 +87,17 @@ export class SingleIdeaComponent implements OnInit, AfterViewInit {
     this.fbSDK.share(url);
     this.fbSDK.shareObservable.subscribe(
       (data) => {
-        console.log('after share data:', data);
         this.ideaService.updateShares(this.idea._id)
           .subscribe(
             d => {
-              console.log('data after shares increase:', d);
             },
-            e => console.log('error after share; test increase:', e)
+            e => {
+            }
           );
       }, // end data
       (error) => {
-        console.log('after share error:', error)
       },// end error
       () => {
-        console.log('after share complete');
       }
     );
   }

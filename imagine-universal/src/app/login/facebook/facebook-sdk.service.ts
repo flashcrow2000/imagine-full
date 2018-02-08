@@ -31,7 +31,6 @@ export class FacebookSdkService  {
           });
         }
       } catch (e) {
-        console.log('FB not availabe:', e);
       }
     }
 
@@ -100,7 +99,6 @@ export class FacebookSdkService  {
         return Observable.create((observer: NextObserver<FbUser>) => {
           if (isPlatformBrowser(this.platformId)) {
             FB.api('/me?fields=id,first_name,last_name,email', (response: any) => {
-              console.log('fb response:', response);
               this.fbUser = response;
               observer.next(this.fbUser);
               observer.complete();
@@ -117,7 +115,6 @@ export class FacebookSdkService  {
         if (resp.status === 'connected') {
             // connect here with your server for facebook login by passing
             // access token given by facebook
-            console.log(resp);
             status = resp.status;
             var uid = resp.authResponse.userID;
             var accessToken = resp.authResponse.accessToken;
@@ -128,7 +125,6 @@ export class FacebookSdkService  {
         }
 
         this.fbLoginStatus = resp.status;
-        console.log(status);
     };
 
     share(url) {
@@ -137,7 +133,6 @@ export class FacebookSdkService  {
           method: 'share',
           href: url,
         }, function(response){
-          console.log('fb share response:', response);
           if (response.error_code) {
             observer.error(response.error_message as string);
           } else {

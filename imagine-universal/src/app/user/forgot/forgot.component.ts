@@ -30,15 +30,12 @@ export class ForgotComponent implements OnInit {
   }
 
   reset() {
-    console.log('reset password for user with resetID:', this.resetId);
     this.userService.resetPassword(this.resetId, this.pwd1.nativeElement.value)
       .subscribe(
         data => {
-          console.log('data after pwd reset', data);
           this.resetSuccess = true;
         },
         error => {
-          console.log('error after pwd reset', error);
           this.resetError= true;
         }
       )

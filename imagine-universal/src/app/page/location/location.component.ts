@@ -102,7 +102,6 @@ export class LocationComponent implements OnInit {
   private setCurrentPosition() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log('auto position:', position);
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = this.addressZoom;
@@ -113,7 +112,6 @@ export class LocationComponent implements OnInit {
   updateUser() {
 
     let label:string = this.searchElementRef.nativeElement.value
-    console.log('location set:', label);
     if (!label) {
       label = "Unknown address";
     }
@@ -123,12 +121,10 @@ export class LocationComponent implements OnInit {
     currentUser.location_label= label;
     this.userService.update(currentUser).subscribe(
       data => {
-        console.log('data after update:', data);
         this.userService.updateLocalUser(currentUser);
         this.router.navigate(['/profile']);
       },
       error => {
-        console.log('error after update:', error);
       }
     )
   }
