@@ -9,12 +9,19 @@
            [ngClass]="{'thumbnail_no_interaction':disableActions}" (click)="onImgClick()">{{idea.title}}</h3>
       <p class="description">{{idea.description}}</p>
       <p class="buttons">
-        <span _ngcontent-c4="" *ngIf="!disableActions">
+        <span *ngIf="currentLanguage == availableLanguages.ENGLISH && !disableActions" _ngcontent-c4="" >
          <a _ngcontent-c4="" *ngIf="!ownIdea && !joinedIdea" (click)="follow()" class="btn btn-join" role="button">JOIN</a>
          <a _ngcontent-c4="" *ngIf="ownIdea" class="btn btn-join" role="button">{{idea.followersTotal}} joined this idea</a>
          <a _ngcontent-c4="" *ngIf="joinedIdea" class="btn btn-join" role="button">You joined this idea</a>
          |
          <a _ngcontent-c4="" (click)="share()" class="btn btn-share" role="button">SHARE</a>
+       </span>
+       <span *ngIf="currentLanguage == availableLanguages.SPANISH && !disableActions" _ngcontent-c4="" >
+         <a _ngcontent-c4="" *ngIf="!ownIdea && !joinedIdea" (click)="follow()" class="btn btn-join" role="button">Unirse</a>
+         <a _ngcontent-c4="" *ngIf="ownIdea" class="btn btn-join" role="button">{{idea.followersTotal}} joined this idea</a>
+         <a _ngcontent-c4="" *ngIf="joinedIdea" class="btn btn-join" role="button">UNIDO A ESTA IDEA</a>
+         |
+         <a _ngcontent-c4="" (click)="share()" class="btn btn-share" role="button">Compartir</a>
        </span>
       </p><!--{{ideaDescription}}<a *ngIf="ideaTruncated" [routerLink]=[showMoreLink]>Show more</a></p-->
     </div>

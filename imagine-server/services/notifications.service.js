@@ -23,11 +23,14 @@ function saveNotification(notifParams) {
                     {target_id: {$eq : notifParams.target_id}},
                     {by_user_id: {$eq : notifParams.by_user_id}}]}).toArray(
         function(err, notification) {
-            if (notification.length > 0) {
+            //if (notification.length > 0) {
                 // TODO this shouldn't happen. From app the 'join' button should be
                 // hidden for users who followed an idea.
-                deferred.reject('User already followed this idea');
-            } else {
+
+                // user can leave and join same idea later, so the
+                // notification will be correctly doubled
+                //deferred.reject('User already followed this idea');
+            //} else {
                 userService.getById(notifParams.by_user_id)
                     .then(function (user) {
                         if (user !== undefined) {
@@ -39,7 +42,7 @@ function saveNotification(notifParams) {
                     .catch(function (err) {
                         deferred.reject('Unable to validate user')
                     });
-            }
+            //}
         });
 
     function getIdeaOwnerId(params) {

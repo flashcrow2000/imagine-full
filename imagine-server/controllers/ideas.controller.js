@@ -4,7 +4,7 @@ var config = require('config/db.json')
 , ideaService = require('services/idea.service')
 , multer = require('multer')
 , fs = require('fs')
-, upload = multer({dest:'/uploads/'});
+, upload = multer({dest:'/assets/images_multer/'});
 
 //routes
 router.post('/new', saveNewIdea);
@@ -99,9 +99,10 @@ function uploadPicture(req, res) {
         // If Submit was accidentally clicked with no file selected...
         res.status(200).send('No image selected');
     } else {
-        var newImg = fs.readFileSync(req.file.path);
-        fs.unlinkSync(req.file.path);
+        //var newImg = fs.readFileSync(req.file.path);
+        //fs.unlinkSync(req.file.path);
         // encode the file as a base64 string.
+        return;
         var encImg = newImg.toString('base64');
         var newImg = {
             ideaId: req.body.ideaId,
@@ -121,6 +122,32 @@ function uploadPicture(req, res) {
                 res.status(400).send(err);
             });
     }
+    // if (req.file == null) {
+    //     // If Submit was accidentally clicked with no file selected...
+    //     res.status(200).send('No image selected');
+    // } else {
+    //     var newImg = fs.readFileSync(req.file.path);
+    //     fs.unlinkSync(req.file.path);
+    //     // encode the file as a base64 string.
+    //     var encImg = newImg.toString('base64');
+    //     var newImg = {
+    //         ideaId: req.body.ideaId,
+    //         contentType: req.file.mimetype,
+    //         size: req.file.size,
+    //         img: Buffer(encImg, 'base64')
+    //     };
+    //     ideaService.uploadImage(newImg)
+    //         .then(function (idea) {
+    //             if (idea) {
+    //                 res.status(200).send(idea);
+    //             } else {
+    //                 res.status(404);
+    //             }
+    //         })
+    //         .catch(function (err) {
+    //             res.status(400).send(err);
+    //         });
+    // }
 }
 
 function getIdeaById(req, res) {

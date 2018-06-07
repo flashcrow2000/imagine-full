@@ -6,6 +6,7 @@ import { Idea } from '../shared/idea.model';
 import {IdeaService} from '../services/ideas.service';
 import {UserService} from "../services/user.service";
 import {ActivatedRoute} from "@angular/router";
+import {LanguagesService} from "../services/languages.service";
 
 @Component({
   selector: 'app-ideas',
@@ -13,6 +14,8 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./ideas.component.css']
 })
 export class IdeasComponent implements OnInit, AfterViewInit{
+  availableLanguages:Object = {};
+  currentLanguage: string = '';
   loading: boolean = true;
   searchTerm:any = '';
   allIdeas: Idea[] = [];
@@ -24,10 +27,19 @@ export class IdeasComponent implements OnInit, AfterViewInit{
     new Idea('tudor', 'Teach others to cook', 9, 'Good food, good life')
   ]*/
   constructor(private ideasService: IdeaService,
+              private langService: LanguagesService,
               private route: ActivatedRoute,
               private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
+      this.availableLanguages = this.langService.availableLanguages;
+      this.currentLanguage = this.langService.currentLanguage;
+      this.langService.languageChanged.subscribe(
+          (lang:string) => {
+              console.log('new language set to ', lang);
+              this.currentLanguage = lang;
+          }
+      );
     this.ideasService.getLatestIdeas(this.route.snapshot.queryParams['q'], 100) // value will be 'last' or 'popular'
       .subscribe(
         data => {

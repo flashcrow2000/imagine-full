@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {UserService} from '../../services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
+import {LanguagesService} from "../../services/languages.service";
 
 @Component({
   selector: 'app-manifesto',
@@ -13,12 +14,22 @@ export class ManifestoComponent implements OnInit, OnDestroy {
   currentUser: any;
   userSubscription: Subscription;
   showManifesto:boolean = true;
-
+    availableLanguages:Object = {};
+    currentLanguage: string = '';
   constructor(
       private userService: UserService,
+      private langService: LanguagesService,
       private router: Router) {}
 
   ngOnInit() {
+      this.availableLanguages = this.langService.availableLanguages;
+      this.currentLanguage = this.langService.currentLanguage;
+      this.langService.languageChanged.subscribe(
+          (lang:string) => {
+              console.log('new language set to ', lang);
+              this.currentLanguage = lang;
+          }
+      );
     this.userSubscription = this.userService.userActivated.subscribe(
       (loggedIn: boolean) => {
         loggedIn ? this.currentUser = this.userService.getCurrentUser() : this.currentUser = undefined;

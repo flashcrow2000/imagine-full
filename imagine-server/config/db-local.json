@@ -1,5 +1,6 @@
-﻿{
-    "connectionString": "mongodb://localhost:27017/imagine-server",
+﻿
+{
+    "connectionString": "mongodb://mongo/imagine-server",
     "apiUrl": "app",
     "secret": "Imagine"
 }

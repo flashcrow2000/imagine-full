@@ -19,18 +19,29 @@
             </div>
           </div>
           <footer class="row">
-            <div class="col-sm-6">
-              <img src="assets/images/cloud.png" alt="" class="" style="width:32px; height: 32px; margin-right: 5px; margin-left: 10px;">
-              <span>Imaginers joined this idea: {{selectedIdea.followers ? selectedIdea.followers.length : 0}}</span>
+            <div class="row">
+              <div class="col-sm-6">
+                <img src="assets/images/cloud.png" alt="" class="" style="width:32px; height: 32px; margin-right: 5px; margin-left: 10px;">
+                <span>Imaginers joined this idea: {{ideaFollowers}}</span>
+              </div>
+              <div class="col-sm-6">
+                <span class="fa fa-user"></span><span>Author of this idea: <a [routerLink]="[userIdeasURL]" id="username">{{userName}}</a></span>
+              </div>
             </div>
-            <div class="col-sm-6">
-              <span class="fa fa-user"></span><span>Author of this idea: <a [routerLink]="[userIdeasURL]" id="username">{{userName}}</a></span>
+            <div class="row">
+              <div class="col-sm-6">
+                  <img src="assets/images/cloud.png" alt="" class="" style="width:32px; height: 32px; margin-right: 5px; margin-left: 10px;">
+                  <span>{{ideaTypes[selectedIdea.typeSelectId]}}</span>
+              </div>
+              <div class="col-sm-6">
+              </div>
             </div>
           </footer>
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <a *ngIf="!ownIdea" (click)="onSupport()" title="" class="btn btn-default btn-lg btn-block support">Join this Idea <span class="fa fa-heart"></span></a>
+            <a *ngIf="!ownIdea && !followingThisIdea" (click)="onSupport()" title="" class="btn btn-default btn-lg btn-block support">Join this Idea <span class="fa fa-heart"></span></a>
+            <a *ngIf="!ownIdea && followingThisIdea" (click)="onUnfollow()" title="" class="btn btn-default btn-lg btn-block support">Leave this Idea <span class="fa fa-heart-o"></span></a>
             <a *ngIf="ownIdea" (click)="onEditIdea()" title="" class="btn btn-default btn-lg btn-block support">Edit Idea <span class="fa fa-edit"></span></a>
           </div>
           <div class="col-sm-6">

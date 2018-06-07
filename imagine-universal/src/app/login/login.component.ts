@@ -11,6 +11,7 @@ import {User} from "../shared/user.model";
 import {RedirectService} from "../services/redirect.service";
 import {Http} from "@angular/http";
 import {AppConfig} from "../app.config";
+import {LanguagesService} from "../services/languages.service";
 
 @Component({
   selector: 'app-login',
@@ -38,9 +39,11 @@ export class LoginComponent implements OnInit {
   human = false;
   forgotPasswordSuccess = false;
   forgotPasswordError = false;
-
+    availableLanguages:Object = {};
+    currentLanguage: string = '';
   constructor(
       private route: ActivatedRoute,
+      private langService:LanguagesService,
       private http: Http,
       private config:AppConfig,
       private router: Router,
@@ -50,6 +53,14 @@ export class LoginComponent implements OnInit {
       private facebookSdkService: FacebookSdkService) { }
 
   ngOnInit() {
+      this.availableLanguages = this.langService.availableLanguages;
+      this.currentLanguage = this.langService.currentLanguage;
+      this.langService.languageChanged.subscribe(
+          (lang:string) => {
+              console.log('new language set to ', lang);
+              this.currentLanguage = lang;
+          }
+      );
       // reset login status
       this.authenticationService.logout();
 

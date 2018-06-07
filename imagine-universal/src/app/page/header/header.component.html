@@ -6,7 +6,14 @@
                 <a routerLink="/" class="hidden-xs">
                     <img src="assets/images/imagine-logo.png" alt="">
                 </a>
+                <div *ngIf="currentLanguage == availableLanguages.ENGLISH" (click)="onLanguageChange(availableLanguages.SPANISH)">
+                    <img src="assets/images/spanish_flag.png" alt="Espanol">
+                </div>
+                <div *ngIf="currentLanguage == availableLanguages.SPANISH" (click)="onLanguageChange(availableLanguages.ENGLISH)">
+                    <img src="assets/images/english_flag.png" alt="English">
+                </div>
             </div>
+
             <div class="col-sm-6">
                 <div class="address-number">
                     <p class="realNumber">Real in 2.222</p>
@@ -27,15 +34,26 @@
                     </a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav left-custom-left">
+                    <ul *ngIf="currentLanguage == availableLanguages.ENGLISH" class="nav navbar-nav left-custom-left">
                         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a (click)="onMenuClick()" routerLink="/">Home</a></li>
                         <li routerLinkActive="active"><a (click)="onMenuClick()" routerLink="/imagine">What is imagine</a></li>
                         <li routerLinkActive="active"><a (click)="onIdeasClicked()">ideas</a></li>
                         <li routerLinkActive="active"><a (click)="onMenuClick()"routerLink="/contribute">ways to be involved</a></li>
                     </ul>
-                    <ul *ngIf="!userLoggedIn" class="nav navbar-nav navbar-right menu-log-reg">
+                    <ul *ngIf="currentLanguage == availableLanguages.SPANISH" class="nav navbar-nav left-custom-left">
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a (click)="onMenuClick()" routerLink="/">INICIO</a></li>
+                        <li routerLinkActive="active"><a (click)="onMenuClick()" routerLink="/imagine">QUÉ ES IMAGINE</a></li>
+                        <li routerLinkActive="active"><a (click)="onIdeasClicked()">IDEAS</a></li>
+                        <li routerLinkActive="active"><a (click)="onMenuClick()"routerLink="/contribute">FORMAS DE COLABORAR</a></li>
+                    </ul>
+
+                    <ul *ngIf="!userLoggedIn && currentLanguage == availableLanguages.ENGLISH" class="nav navbar-nav navbar-right menu-log-reg">
                         <li><a routerLink="/login">Login</a></li>
                         <li><a routerLink="/signup">Sign up</a></li>
+                    </ul>
+                    <ul *ngIf="!userLoggedIn && currentLanguage == availableLanguages.SPANISH" class="nav navbar-nav navbar-right menu-log-reg">
+                        <li><a routerLink="/login">INICIAR SESION</a></li>
+                        <li><a routerLink="/signup">REGISTRO</a></li>
                     </ul>
                     <div *ngIf="userLoggedIn" class="nav navbar-nav navbar-right user-menu">
                       <ul role="navigation" class="list-inline user-notifications">

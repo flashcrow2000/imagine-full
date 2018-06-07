@@ -7,6 +7,7 @@ import {User} from "../../shared/user.model";
 import {NotificationsService} from "../../services/notifications.service";
 import {IdeaService} from "../../services/ideas.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {LanguagesService} from "../../services/languages.service";
 
 @Component({
   selector: 'app-header',
@@ -26,6 +27,8 @@ export class HeaderComponent implements OnInit {
     web: new FormControl()
   });
   dropDownCloseable:boolean = false;
+  availableLanguages:Object = {};
+  currentLanguage: string = '';
   ownIdeasLink:string;
   dropdownvisible:boolean = false;
   userLoggedIn = false;
@@ -47,6 +50,7 @@ export class HeaderComponent implements OnInit {
 
 
   constructor(private userService:UserService,
+              private langService:LanguagesService,
               private router:Router,
               private activatedRoute:ActivatedRoute,
               private notif:NotificationsService,
@@ -55,6 +59,15 @@ export class HeaderComponent implements OnInit {
               private authService: AuthenticationService) { }
 
   ngOnInit() {
+    this.availableLanguages = this.langService.availableLanguages;
+    this.currentLanguage = this.langService.currentLanguage;
+    this.langService.languageChanged.subscribe(
+        (lang:string) => {
+            console.log('new language set to ', lang);
+            this.currentLanguage = lang;
+        }
+    );
+
     this.userService.userActivated.subscribe(
       (loggedIn: boolean) =>
       {
@@ -66,6 +79,7 @@ export class HeaderComponent implements OnInit {
         this.ref.detectChanges();
       }
     );
+
     this.userService.userInfoChanged.subscribe(
       (user:User) => {
         // if (user.location_label) {
@@ -83,6 +97,10 @@ export class HeaderComponent implements OnInit {
     if (this.userLoggedIn) {
       this.populateUserData();
     }
+  }
+
+  onLanguageChange(newLang) {
+    this.langService.saveCurrentLanguage(newLang);
   }
 
   onClickOutside() {

@@ -3,6 +3,7 @@ import {IdeaService} from "../../services/ideas.service";
 import {UserService} from "../../services/user.service";
 import {Idea} from "../../shared/idea.model";
 import {Subscription} from "rxjs/Subscription";
+import {LanguagesService} from "../../services/languages.service";
 
 @Component({
   selector: 'app-home',
@@ -17,11 +18,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   ideasLoaded:boolean = false;
   userLoggedIn:boolean;
   tempSub:Subscription;
+  availableLanguages:Object = {};
+  currentLanguage: string = '';
   constructor(private userService:UserService,
+              private langService:LanguagesService,
               private ref: ChangeDetectorRef,
               private ideaService:IdeaService) { }
 
   ngOnInit() {
+    this.availableLanguages = this.langService.availableLanguages;
+    this.currentLanguage = this.langService.currentLanguage;
+    this.langService.languageChanged.subscribe(
+        (lang:string) => {
+            console.log('new language set to ', lang);
+            this.currentLanguage = lang;
+        }
+    );
     this.tempSub = this.userService.userActivated.subscribe(
       (loggedIn: boolean) =>
       {

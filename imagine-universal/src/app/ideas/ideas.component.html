@@ -2,7 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-9 center-col">
-        <h1>Ideas in action</h1>
+        <h1 *ngIf="currentLanguage == availableLanguages.ENGLISH">Ideas in action</h1>
+        <h1 *ngIf="currentLanguage == availableLanguages.SPANISH">Ideas en acción</h1>
         <div class="addthis_inline_share_toolbox"></div>
 
       </div>
@@ -13,15 +14,24 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-11">
-        <div class="form-group has-feedback">
+        <div *ngIf="currentLanguage == availableLanguages.ENGLISH" class="form-group has-feedback">
           <!--<label for="search">Search for an idea: </label>-->
           <input type="text" id="search" name="search"
                  value="" class="form-control" (keypress)="onKey($event)"
                  placeholder="&#xf0eb; Search for an idea" [(ngModel)]="searchTerm">
         </div>
+        <div *ngIf="currentLanguage == availableLanguages.SPANISH" class="form-group has-feedback">
+          <!--<label for="search">Search for an idea: </label>-->
+          <input type="text" id="search" name="search"
+                 value="" class="form-control" (keypress)="onKey($event)"
+                 placeholder="&#xf0eb; Buscar una idea" [(ngModel)]="searchTerm">
+        </div>
       </div>
-      <div class="col-sm-1">
+      <div *ngIf="currentLanguage == availableLanguages.ENGLISH" class="col-sm-1">
         <button type="button" (click)="onSearch()">Search</button>
+      </div>
+      <div *ngIf="currentLanguage == availableLanguages.SPANISH" class="col-sm-1">
+        <button type="button" (click)="onSearch()">Buscar</button>
       </div>
     </div>
   </div>

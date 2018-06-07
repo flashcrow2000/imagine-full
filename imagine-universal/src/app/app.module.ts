@@ -32,6 +32,7 @@ import { IdeaService } from './services/ideas.service';
 import { JwtService } from './services/jwt.service';
 import {HashtagsService} from './services/hashtags.service';
 import {RedirectService} from './services/redirect.service';
+import {LanguagesService} from "./services/languages.service";
 /// Other
 
 import { AuthGuard } from './guards/auth-guard.service';
@@ -60,6 +61,7 @@ import {ClickOutsideModule} from 'ng-click-outside';
 import {RlTagInputModule} from './modules/angular2-tag-input/tag-input.module';
 import { ForgotComponent } from './user/forgot/forgot.component';
 import {RebuildTagsComponent} from "./page/rebuild-tags/rebuild-tags.component";
+
 // import {TagInputComponent} from "./modules/angular2-tag-input/components/tag-input/tag-input.component";
 
 
@@ -120,6 +122,7 @@ import {RebuildTagsComponent} from "./page/rebuild-tags/rebuild-tags.component";
               UserService,
               HashtagsService,
               RedirectService,
+              LanguagesService,
               AuthenticationService,
               FacebookSdkService,
               NotificationsService,

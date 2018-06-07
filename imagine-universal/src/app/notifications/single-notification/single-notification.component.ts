@@ -3,6 +3,7 @@ import {Notification} from "../../shared/notification.model";
 import {UserService} from "../../services/user.service";
 import {IdeaService} from "../../services/ideas.service";
 import {Idea} from "../../shared/idea.model";
+import {LanguagesService} from "../../services/languages.service";
 
 @Component({
   selector: 'app-single-notification',
@@ -24,8 +25,10 @@ export class SingleNotificationComponent implements OnInit {
   ideaDescription: string;
   ideaTitle: string;
 
-
+    availableLanguages:Object = {};
+    currentLanguage: string = '';
   constructor(private userService:UserService,
+              private langService: LanguagesService,
               private ideaService:IdeaService) { }
 
   ngOnInit() {
@@ -36,6 +39,14 @@ export class SingleNotificationComponent implements OnInit {
     target_id: "59db397e718c5b000f3e1777" (idea id)
     type: "followers"
      */
+      this.availableLanguages = this.langService.availableLanguages;
+      this.currentLanguage = this.langService.currentLanguage;
+      this.langService.languageChanged.subscribe(
+          (lang:string) => {
+              console.log('new language set to ', lang);
+              this.currentLanguage = lang;
+          }
+      );
 
     this.userService.getUsernameById(this.notification.by_user_id)
       .subscribe(

@@ -171,6 +171,24 @@ export class UserService {
       }
     }
 
+    leaveJoinedIdea(id:string) {
+        if (!this.currentUser.following) {
+            return;
+        }
+        let index = this.currentUser.following.indexOf(id);
+        if (index > -1) {
+            this.currentUser.following.splice(index, 1);
+            console.log('new following array:', this.currentUser.following);
+            this.update(this.currentUser).subscribe(
+                data => {
+                    this.updateLocalUser(this.currentUser);
+                }
+            );
+        } else {
+            return;
+        }
+    }
+
     convertDBUserToImagine(data:any, override:boolean = false):User {
       let tUser:User = new User();
 

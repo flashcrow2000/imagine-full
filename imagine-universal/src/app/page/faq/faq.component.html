@@ -1,7 +1,7 @@
 <section>
   <div class="container">
     <div class="row">
-      <div class="col-sm-12">
+      <div *ngIf="currentLanguage == availableLanguages.ENGLISH" class="col-sm-12">
         <h1 class="text-center">FAQs</h1>
 
         <h4>What is "Imagine ALL THE PEOPLE"?</h4>
@@ -41,7 +41,7 @@
 
         <h4>Idea in action</h4>
 
-        <p>An "Idea in Action" is any new proposal described by an Imaginer. We call it "idea in Action", because we are not just a social network to connect people. We are a platform where people act and decide to do small actions proposed by other people that will help eliminate possessions, countries or religions.</p>
+        <p>An "Idea in Action" is any new proposal described by an Imaginer. We call it "Idea in Action", because we are not just a social network to connect people. We are a platform where people act and decide to do small actions proposed by other people that will help eliminate possessions, countries or religions. The Ideas in Action can be added in any language.</p>
 
         <h4>The 3 categories</h4>
 
@@ -66,9 +66,80 @@
 
         <p>Every "Idea in Action" will have a comment box, where users can comment. This way there will be direct contact with the person who created the "Idea in Action" and all the supporters.</p>
 
-        <h4>Our Goal</h4>
+        <h4>What is our goal?</h4>
 
         <p>Our goal can be read <a [routerLink]="['/imagine']">here</a>. By registering to our platform, you sign our manifest and help put our vision into practice, of John Lennon's song Imagine, of a world without possessions, countries and religions.</p>
+
+
+      </div>
+      <div *ngIf="currentLanguage == availableLanguages.SPANISH" class="col-sm-12">
+        <h1 class="text-center">FAQs</h1>
+
+        <h4>¿Qué es “Imagine ALL THE PEOPLE”?</h4>
+
+        <p>Somos una comunidad online de personas que creemos en el sueño de John Lennon de hacer un mundo en paz sin posesiones, países, ni religiones. Iniciamos este proyecto para hacer realidad este sueño. Y empezamos por nosotros mismos, compartiendo nuestras pequeñas ideas y realizando pequeñas acciones diarias. Si empezamos ahora, poco a poco alcanzaremos un mundo sin posesiones, países ni religiones.</p>
+
+        <h4>¿Qué hay detrás de esta plataforma?</h4>
+
+        <p>Esta plataforma funciona gracias a un grupo de emprendedores sociales que creen profundamente en la idea de Imagine ALL THE PEOPLE.</p>
+
+        <h4>¿Cómo se financia esta plataforma?</h4>
+
+        <p>Gracias a personas que creen en “Imagine ALL THE PEOPLE” podemos mantener esta plataforma que es gratuita, y siempre será gratuita, para todos nuestros usuarios. Creemos que siempre habrá personas que realmente crean en lo que estamos haciendo y, por tanto, serán felices apoyándonos.Gracias a las donaciones voluntarias a iWith.org para “Imagine ALL THE PEOPLE”, hemos podido desarrollar esta plataforma. Para seguir apoyando esta iniciativa, puedes donar a <a href="http://www.iwith.org/forms/donante" target="_blank">iWith.org</a> o también donar a través de <a href="https://www.teaming.net/imagineallthepeople" target="_blank">Teaming</a>.</p>
+
+        <h4>¿Por qué debería participar?</h4>
+
+        <p>Nuestra esperanza es que un día tengamos tanto apoyo de gente de todo el mundo, que los políticos y otras personas poderosas nos escuchen. Te animamos a que te sumes a nosotros registrándote <a [routerLink]="['/signup']">aquí</a>. </p>
+
+        <h4>¿Está abierto a cualquier país?</h4>
+
+        <p>Absolutamente! Invitamos a cualquier persona de cualquier parte del mundo a participar. De esta manera, veremos y nos daremos cuenta de que todos somos iguales, a pesar de que nuestros orígenes y culturas son diferentes. Todos queremos un mundo en paz, ¿verdad?</p>
+
+        <h4>¿Cómo puedo colaborar?</h4>
+
+        <p>Puedes colaborar  <a [routerLink]="['/signup']">registrándote </a> y convirtiéndote en un Imaginer. Además de esto, apreciamos que compartas tantas ideas y acciones como puedas de este proyecto. Las ideas y acciones pueden ser tuyas o de otras personas a las que decidas dar soporte. También nos gustaría estar en contacto con las personas que nos ayudan a difundir y desarrollar "Imagine ALL THE PEOPLE" en su pueblo, ciudad o país. Puedes contactarnos <a href="mailto:info@imagineallthepeople.world">aquí</a>.</p>
+
+        <h4>¿Por qué dices que será “real en 2.222”?</h4>
+
+        <p>Estamos trabajando en un sueño que hasta ahora era solo una popular canción de paz escrita por John Lennon. A partir de ahora, estamos trabajando en los "primeros pasos" para poner en práctica este sueño. Somos realistas y sabemos que no veremos un mundo ideal sin posesiones, países y religiones en 10, 20 o 30 años. Pero si todos los días inspiramos a más y más personas a eliminar posesiones, países y religiones, nos atrevemos a pensar que dentro de 200 años este mundo ideal puede ser una realidad. Es una cuestión de inspirar, convencer y conectar a TODO EL MUNDO. Por otra parte, el 2.222 es solo un buen objetivo.</p>
+
+        <h3>GLOSARIO</h3>
+
+
+        <h4>Imaginer</h4>
+
+        <p>Un Imaginer es cualquier persona que <a [routerLink]="['/signup']">se inscribe</a> para ser parte de este proyecto. Un Imaginer apoya y/o comparte "Ideas en acción". Siendo Imaginer, también puedes crear tus propias "Ideas en acción" que ayuden a eliminar posesiones, países o religiones.</p>
+
+        <h4>Idea en acción</h4>
+
+        <p>Una "Idea en acción" es cualquier nueva propuesta descrita por un Imaginer. Lo llamamos "idea en acción", porque no somos solo una red social que conecta a las personas. Somos una plataforma donde las personas actúan y deciden proponer y llevar a cabo pequeñas acciones que ayuden a eliminar posesiones, países o religiones. Las Ideas en Acción pueden añadirse en cualquier idioma.</p>
+
+        <h4>Las 3 categorías</h4>
+
+        <p>Una vez hayas creado tu "Idea en acción", se te pedirá que escojas una de las siguientes opciones:</p>
+        <ul>
+          <li>Imagina que no hay países</li>
+          <li>Imagina que no hay posesiones</li>
+          <li>Imagina que no hay religiones tampoco</li>
+        </ul>
+
+        <p>Hacemos esto porque el objetivo de nuestro proyecto es poner en práctica la idea de John Lennon.</p>
+
+        <h4>Unirse</h4>
+
+        <p>Con cada "Idea en acción" puedes hacer clic en el botón “Unirse” si te sientes atraído por esa idea. Cuando una idea determinada tenga muchos seguidores, esa idea será más visible en nuestra plataforma y saldrá como una de las ideas más populares. Con ello vemos qué "ideas en acción" son las que más valora la gente. Para unirte a una "Idea en Acción", debe estar registrado como Imaginer.</p>
+
+        <h4>Compartir</h4>
+
+        <p>Al hacer clic en el botón Compartir de una "Idea en acción", puedes compartir la idea automáticamente con tus amigos y familiares en diferentes redes sociales. Cualquiera puede compartir una "Idea en acción" sin necesidad de estar registrado como Imaginer.</p>
+
+        <h4>Comentario</h4>
+
+        <p>Cada "Idea en acción" tendrá un cuadro de comentarios, donde los usuarios pueden comentar aspectos de la idea. De esta forma habrá contacto directo con la persona que creó la "Idea en Acción" y con todos los que se han unido a esa idea.</p>
+
+        <h4>¿Cuál es nuestro objetivo?</h4>
+
+        <p>Nuestro objetivo puede leerse  <a [routerLink]="['/imagine']">aqui</a>. Registrándote en nuestra plataforma, aceptas nuestro manifiesto y ayudas a poner en práctica nuestra visión de la canción Imagine de John Lennon por mundo sin posesiones, países ni religiones.</p>
 
 
       </div>

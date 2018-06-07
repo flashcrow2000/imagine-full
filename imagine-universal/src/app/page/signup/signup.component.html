@@ -2,7 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-5 center-col">
-        <h1>Sign Up</h1>
+        <h1 *ngIf="currentLanguage == availableLanguages.ENGLISH">Sign Up</h1>
+        <h1 *ngIf="currentLanguage == availableLanguages.SPANISH">Registro</h1>
 
         <div class="center text-center">
           <button type="button" id="fb" class="loginBtn loginBtn--facebook"
@@ -16,27 +17,43 @@
                       'has-danger': !emailValid && (signupForm.get('email').touched || signupForm.get('email').dirty),
                       'has-success': emailValid && (signupForm.get('email').touched || signupForm.get('email').dirty)
                     }">
-            <label for="email">E-mail </label>
-            <input type="email" id="email" value="" class="form-control"
+            <label *ngIf="currentLanguage == availableLanguages.ENGLISH" for="email">E-mail </label>
+            <label *ngIf="currentLanguage == availableLanguages.SPANISH" for="email">Correo electrónico </label>
+            <input *ngIf="currentLanguage == availableLanguages.ENGLISH" type="email" id="email" value="" class="form-control"
                    name="email" formControlName="email"
                    [(ngModel)]="model.username" placeholder="&#xf0e0; Email"
+                   required
+                   (keyup)="emailValidator(signupForm.get('email').value) == false ? emailValid = false : emailValid= true">
+            <input *ngIf="currentLanguage == availableLanguages.SPANISH" type="email" id="email" value="" class="form-control"
+                   name="email" formControlName="email"
+                   [(ngModel)]="model.username" placeholder="&#xf0e0; Correo electrónico"
                    required
                    (keyup)="emailValidator(signupForm.get('email').value) == false ? emailValid = false : emailValid= true">
             <div *ngIf="!emailValid && signupForm.get('email').touched" style="color:red;">Please enter a valid e-mail</div>
             <div *ngIf="usernameExists" style="color:red;">This e-mail has already been used!</div>
           </div>
           <div class="form-group">
-            <label for="password">Password: </label>
-            <input type="password" id="password" name="password"  class="form-control"
+            <label *ngIf="currentLanguage == availableLanguages.ENGLISH" for="password">Password: </label>
+            <label *ngIf="currentLanguage == availableLanguages.SPANISH" for="password">Contraseña: </label>
+            <input *ngIf="currentLanguage == availableLanguages.ENGLISH" type="password" id="password" name="password"  class="form-control"
                    [(ngModel)]="model.password" required formControlName="password"
                    value="" placeholder="&#xf023; Password" >
+            <input *ngIf="currentLanguage == availableLanguages.SPANISH" type="password" id="password" name="password"  class="form-control"
+                   [(ngModel)]="model.password" required formControlName="password"
+                   value="" placeholder="&#xf023; Contraseña" >
             <div *ngIf="signupForm.get('password').touched && signupForm.get('password').value == ''" style="color:red;">Please enter a password</div>
           </div>
           <div class="form-group">
-            <label for="password2">Repeat password: </label>
-            <input type="password" id="password2" name="password2" class="form-control"
+            <label *ngIf="currentLanguage == availableLanguages.ENGLISH" for="password2">Repeat password: </label>
+            <label *ngIf="currentLanguage == availableLanguages.SPANISH" for="password2">Repite contraseña: </label>
+            <input *ngIf="currentLanguage == availableLanguages.ENGLISH" type="password" id="password2" name="password2" class="form-control"
                    [(ngModel)]="model.password2" required formControlName="password2"
                    value="" placeholder="&#xf023; Repeat password"
+            (keyup)="signupForm.get('password2').value != signupForm.get('password').value ? passwordValid=false : passwordValid = true"
+            >
+            <input *ngIf="currentLanguage == availableLanguages.SPANISH"t type="password" id="password2" name="password2" class="form-control"
+                   [(ngModel)]="model.password2" required formControlName="password2"
+                   value="" placeholder="&#xf023; Repite contraseña"
             (keyup)="signupForm.get('password2').value != signupForm.get('password').value ? passwordValid=false : passwordValid = true"
             >
             <div *ngIf="signupForm.get('password2').touched &&
@@ -52,8 +69,10 @@
           <button type="button" class="btn btn-default form-control"
                   [disabled]="!human" (click)="register()"  style="margin-top: 10px;">Register</button>
 
-          <p>By clicking register, you agree to all the terms and conditions of Imagine.</p>
-          <p>Already have an account? <a [routerLink]="['/login']" title="Log In">Log in</a></p>
+          <p *ngIf="currentLanguage == availableLanguages.ENGLISH">By clicking register, you agree to all the terms and conditions of Imagine.</p>
+          <p *ngIf="currentLanguage == availableLanguages.SPANISH">Haciendo clic en registro aceptas todos los términos y condiciones de Imagine.</p>
+          <p *ngIf="currentLanguage == availableLanguages.ENGLISH">Already have an account? <a [routerLink]="['/login']" title="Log In">Log in</a></p>
+          <p *ngIf="currentLanguage == availableLanguages.SPANISH">¿Ya tienes una cuenta?  <a [routerLink]="['/login']" title="Log In">Inicia Sesión</a></p>
 
 
 
