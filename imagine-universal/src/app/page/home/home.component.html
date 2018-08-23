@@ -54,7 +54,7 @@
 <section class="">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <div *ngIf="currentLanguage == availableLanguages.ENGLISH" class="col-sm-12">
               <h1 class="text-center">Imagine All the People</h1>
               <p>We are an online community of people that believe in John Lennon's dream of a peaceful world without possessions, countries, and religions. We are starting a project to make this dream real. We start with ourselves and share our small ideas and complete small actions daily. We just want to start the process of changing possessions, countries and religions little by little.
               <p>If one day (2.222) all possessions, religions and countries are being shared (bottom up) in the end these 3 big powers that nowadays cause so many problems will be eliminated...</p>
@@ -62,10 +62,18 @@
                 <a *ngIf="!userLoggedIn" [routerLink]="['/signup']" class="btn btn-block btn-default btn-lg">BECOME IMAGINER</a>
                 <a *ngIf="userLoggedIn" [routerLink]="['/new-idea']" class="btn btn-block btn-default btn-lg">ADD A NEW IDEA <span class="fa fa-plus-circle"></span></a>
             </div>
+            <div *ngIf="currentLanguage == availableLanguages.SPANISH" class="col-sm-12">
+                <h1 class="text-center">Imagine All the People</h1>
+                <p>Somos una comunidad online de personas que creemos en el sueño de John Lennon de hacer un mundo en paz sin posesiones, países, ni religiones. Iniciamos este proyecto para hacer realidad este sueño. Y empezamos por nosotros mismos, compartiendo nuestras pequeñas ideas y realizando pequeñas acciones diarias. Si empezamos ahora, poco a poco alcanzaremos un mundo sin posesiones, países ni religiones.</p>
+                <p>Si un día (esperemos que en el año 2.222) todas las religiones, países y posesiones se comparten (de abajo a arriba) al final, estos 3 grandes poderes que hoy causan tantos problemas dejarán de existir...</p>
+                <p>&nbsp;</p>
+                <a *ngIf="!userLoggedIn" [routerLink]="['/signup']" class="btn btn-block btn-default btn-lg">HAZTE IMAGINER</a>
+                <a *ngIf="userLoggedIn" [routerLink]="['/new-idea']" class="btn btn-block btn-default btn-lg">AÑADE UNA NUEVA IDEA <span class="fa fa-plus-circle"></span></a>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="text-center author-box">We are {{usersCount}} Imaginers making John Lennon's Imagine come true.</h2>
+                <h2 class="text-center author-box">Somos {{usersCount}} Imaginers haciendo realidad el sueño de John Lennon</h2>
             </div>
         </div>
         <div class="row">
@@ -80,13 +88,24 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div *ngIf="currentLanguage == availableLanguages.ENGLISH" class="col-sm-6">
                 <div class="ideas clearfix">
                     <div class="imaginersBox">
                         <img src="assets/images/plain.png" />
                         <div class="imaginers-text">
                             <h2>{{ideasCount}}</h2>
                             <p>IDEAS IN ACTION</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="currentLanguage == availableLanguages.SPANISH" class="col-sm-6">
+                <div class="ideas clearfix">
+                    <div class="imaginersBox">
+                        <img src="assets/images/plain.png" />
+                        <div class="imaginers-text">
+                            <h2>{{ideasCount}}</h2>
+                            <p>IDEAS EN ACCIÓN</p>
                         </div>
                     </div>
                 </div>

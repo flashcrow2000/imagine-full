@@ -11,6 +11,7 @@ import {DOCUMENT} from "@angular/platform-browser";
 import {HashtagsService} from "../../services/hashtags.service";
 import {Hashtag} from "../../shared/hashtag.model";
 import {Router} from "@angular/router";
+import {LanguagesService} from "../../services/languages.service";
 
 
 @Component({
@@ -58,11 +59,13 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
   ideaHashtags:any= [];
   updateIdea:boolean = false;
   requestUsername:boolean = false;
-
+    availableLanguages:Object = {};
+    currentLanguage: string = '';
   refreshInterval:any;
   editIdea:Idea = null;
   constructor(@Inject(DOCUMENT) private document:any,
               private userService:UserService,
+              private langService: LanguagesService,
               private router: Router,
               private ref:ChangeDetectorRef,
               private tagsService: HashtagsService,
@@ -70,6 +73,14 @@ export class NewIdeaComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+      this.availableLanguages = this.langService.availableLanguages;
+      this.currentLanguage = this.langService.currentLanguage;
+      this.langService.languageChanged.subscribe(
+          (lang:string) => {
+              console.log('new language set to ', lang);
+              this.currentLanguage = lang;
+          }
+      );
     this.currentUser = this.userService.getCurrentUser();
     if (!this.currentUser.fb_first_name) {
       this.requestUsername = true;

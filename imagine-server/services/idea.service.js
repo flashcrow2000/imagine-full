@@ -99,8 +99,11 @@ function update(_id, ideaParams) {
         imgType: ideaParams.imgType,
         imgBuffer: ideaParams.imgBuffer,
 	};
-
-
+	if (ideaParams.followers) {
+		set.followers = ideaParams.followers
+	};
+	console.log('set for update');
+	console.log(set.followers);
 	db.ideas.update(
 		{ _id: mongo.helper.toObjectID(_id) },
 		{ $set: set },

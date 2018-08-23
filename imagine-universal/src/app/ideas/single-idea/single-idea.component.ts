@@ -7,6 +7,7 @@ import {AppConfig} from "../../app.config";
 import {RedirectService} from "../../services/redirect.service";
 import {FacebookSdkService} from "../../login/facebook/facebook-sdk.service";
 import {IdeaService} from "../../services/ideas.service";
+import {LanguagesService} from "../../services/languages.service";
 
 @Component({
   selector: 'app-single-idea',
@@ -27,7 +28,10 @@ export class SingleIdeaComponent implements OnInit, AfterViewInit {
   @ViewChild('el')
     target: ElementRef;
   defaultImgURL = 'assets/images/ciudad.png';
+  availableLanguages:Object = {};
+  currentLanguage: string = '';
   constructor(private userService: UserService,
+              private langService: LanguagesService,
               private config: AppConfig,
               private redirectService:RedirectService,
               private ideaService:IdeaService,
@@ -35,6 +39,15 @@ export class SingleIdeaComponent implements OnInit, AfterViewInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.availableLanguages = this.langService.availableLanguages;
+    this.currentLanguage = this.langService.currentLanguage;
+    this.langService.languageChanged.subscribe(
+        (lang:string) => {
+            console.log('new language set to ', lang);
+            this.currentLanguage = lang;
+        }
+    );
+
     if (this.userService.currentUser) {
       this.currentUser = this.userService.getCurrentUser();
       if (this.idea.user_id == this.currentUser._id) {

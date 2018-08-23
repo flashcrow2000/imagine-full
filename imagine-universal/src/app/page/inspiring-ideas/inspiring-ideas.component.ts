@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Idea} from "../../shared/idea.model";
+import {LanguagesService} from "../../services/languages.service";
 
 @Component({
   selector: 'app-inspiring-ideas',
@@ -8,9 +9,19 @@ import {Idea} from "../../shared/idea.model";
 })
 export class InspiringIdeasComponent implements OnInit {
   ideas: Idea[] = [];
-  constructor() { }
+    availableLanguages:Object = {};
+    currentLanguage: string = '';
+  constructor(private langService: LanguagesService) { }
 
   ngOnInit() {
+      this.availableLanguages = this.langService.availableLanguages;
+      this.currentLanguage = this.langService.currentLanguage;
+      this.langService.languageChanged.subscribe(
+          (lang:string) => {
+              console.log('new language set to ', lang);
+              this.currentLanguage = lang;
+          }
+      );
     this.ideas.push(this.createIdea("No Religions",
       "My daughters are my masters and my micro religion","I have got 2 beautiful daughters called Monica and Africa. Monica was born with a serious brain damage and Africa is perfectly healthy. But both are teaching me every day important things about life, about releasing fears, about enjoying small moments and thinking very straightforward about how our world peace should work. It's just a matter of watching them and carefully listening to them. Every month I would like to share a micro example of what my daughters teach me and invite people to do the same as I am convinced that we all have our masters and spiritual leaders at home and much closer than we can imagine.","assets/images/ideas/image-1.jpg"))
     this.ideas.push(this.createIdea("No Countries",

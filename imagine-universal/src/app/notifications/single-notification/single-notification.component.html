@@ -16,7 +16,8 @@
       <small class="update">{{userName}} has followed your idea!</small>
 
       <h3 class="blogPost-title">{{ideaTitle}}</h3>
-      <p>{{ideaDescription}}<a *ngIf="readMoreLinkVisible" [routerLink]=[readMoreLink]>Read more</a></p>
+      <p *ngIf="currentLanguage == availableLanguages.ENGLISH">{{ideaDescription}}<a *ngIf="readMoreLinkVisible" [routerLink]=[readMoreLink]>Read more</a></p>
+      <p *ngIf="currentLanguage == availableLanguages.SPANISH">{{ideaDescription}}<a *ngIf="readMoreLinkVisible" [routerLink]=[readMoreLink]>Leer más</a></p>
 
     </div>
     <div class="thumImg col-sm-3">

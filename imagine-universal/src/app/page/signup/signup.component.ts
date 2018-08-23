@@ -10,6 +10,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Http} from "@angular/http";
 import {AppConfig} from "../../app.config";
 import {RedirectService} from "../../services/redirect.service";
+import {LanguagesService} from "../../services/languages.service";
 
 @Component({
   selector: 'app-signup',
@@ -48,10 +49,12 @@ export class SignupComponent implements OnInit {
   fbRespString : any;
   returnUrl: string;
   loggedIn:boolean = false;
-
+    availableLanguages:Object = {};
+    currentLanguage: string = '';
   constructor(
       private http: Http,
       private route: ActivatedRoute,
+      private langService: LanguagesService,
       private router: Router,
       private config: AppConfig,
       private userService: UserService,
@@ -60,6 +63,14 @@ export class SignupComponent implements OnInit {
 
 
   ngOnInit() {
+      this.availableLanguages = this.langService.availableLanguages;
+      this.currentLanguage = this.langService.currentLanguage;
+      this.langService.languageChanged.subscribe(
+          (lang:string) => {
+              console.log('new language set to ', lang);
+              this.currentLanguage = lang;
+          }
+      );
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     console.log("cu: ",this.userService.currentUser)
     this.loggedIn = this.userService.currentUser !== undefined;

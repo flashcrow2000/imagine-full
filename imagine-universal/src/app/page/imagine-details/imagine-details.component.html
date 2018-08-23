@@ -17,17 +17,31 @@
 <section class="">
   <div class="container">
     <div class="row">
-      <div class="col-sm-12">
+      <div *ngIf="currentLanguage == availableLanguages.ENGLISH" class="col-sm-12">
         <h1 class="text-center">What is Imagine</h1>
         <p>
           Welcome to Imagine ALL THE PEOPLE <br><br>
-          This is a project inspired by a John Lennon song called Imagine. We imagine our world without possessions, countries and religions. But why should we only imagine world peace in the future? Let's start working on world peace today, to make this dream real by the year 2222!
+          This is a Peace Project inspired by a John Lennon song called Imagine. We imagine our world without possessions, countries and religions. But why should we only imagine world peace in the future? Let's start working on world peace today, to make this dream real by the year 2222!
         </p>
         <p>How? You start by sharing small ideas or taking part in small actions to help eliminate possessions, countries and religions. Sign up at www.imagineallthepeople.world to give your support and help to manifest our goal of world peace. After signing up, you can then start to contribute your own small ideas or actions in order to create world peace within the three categories of possessions, countries, and religions.</p>
 
         <p>Here are <a [routerLink]="['/inspiring']">some examples to get inspired</a>. Support other ideas you like, share them with your friends, and spread the word. As John Lennon said: "You may say I am a dreamer, but I am not the only one"...</p>
 
         <h3 class="text-right">Let's make this dream a reality.</h3>
+
+      </div>
+
+      <div *ngIf="currentLanguage == availableLanguages.SPANISH" class="col-sm-12">
+        <h1 class="text-center">Qué es Imagine</h1>
+        <p>
+          Bienvenida/o a Imagine ALL THE PEOPLE <br><br>
+          Este es un proyecto inspirado en una canción de John Lennon llamada Imagine. Nosotros imaginamos un mundo sin posesiones, países y religiones. Pero ¿por qué deberíamos solo imaginarnos la paz mundial en el futuro? ¡Comencemos a trabajar en la paz mundial hoy, para hacer realidad este sueño para el año 2.222!
+        </p>
+        <p>¿Cómo? Empieza compartiendo pequeñas ideas o participando en pequeñas acciones para ayudar a eliminar posesiones, países y religiones. Regístrate en www.imagineallthepeople.world para dar tu apoyo y ayudar a conseguir nuestro objetivo de tener un mundo en paz. Después de registrarte, puedes comenzar a contribuir con tus propias pequeñas ideas o acciones para crear un mundo en paz clasificándolas según estas tres categorías: sin posesiones, sin países y sin religiones.</p>
+
+        <p>Aquí tienes <a [routerLink]="['/inspiring']">algunos ejemplos para inspirarte</a>. Apoya otras ideas que te gusten, compártelas con tus amigos y haz correr la voz. Como dijo John Lennon: "Podrás decir que soy un soñador, pero no soy el único" …</p>
+
+        <h3 class="text-right">Hagamos este sueño realidad.</h3>
 
       </div>
 
