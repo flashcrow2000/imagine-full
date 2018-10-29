@@ -54,14 +54,14 @@
 <section class="">
     <div class="container">
         <div class="row">
-            <div *ngIf="currentLanguage == availableLanguages.ENGLISH" class="col-sm-12">
+            <div *ngIf="currentLanguage == 'english'" class="col-sm-12">
               <h1 class="text-center">MANIFESTO Imagine ALL THE PEOPLE</h1>
               <p>We truly believe in what John imagined; a peaceful new world without possessions, countries and religions. Together we want to put into practice his beautiful idea starting with ourselves, sharing many ideas, and doing small actions that eliminate possessions, countries and religions. Our goal is to work together "bottom up", inspiring others in order to make this dream a reality in the year 2.222!</p>
               <p>&nbsp;</p>
                 <a *ngIf="!userLoggedIn" [routerLink]="['/signup']" class="btn btn-block btn-default btn-lg">SIGN THE MANIFESTO</a>
                 <a *ngIf="userLoggedIn" [routerLink]="['/new-idea']" class="btn btn-block btn-default btn-lg">ADD A NEW IDEA <span class="fa fa-plus-circle"></span></a>
             </div>
-            <div *ngIf="currentLanguage == availableLanguages.SPANISH" class="col-sm-12">
+            <div *ngIf="currentLanguage == 'spanish'" class="col-sm-12">
                 <h1 class="text-center">MANIFIESTO Imagine ALL THE PEOPLE</h1>
                 <p>Realmente creemos en lo que John Lennon imaginó; un nuevo mundo en paz sin posesiones, países ni religiones. Juntos queremos poner en práctica su hermosa idea comenzando por nosotros mismos, compartiendo muchas ideas y haciendo pequeñas acciones encaminadas a eliminar posesiones, países y religiones. Nuestro objetivo es trabajar juntos "de abajo hacia arriba", inspirando a otros para que este sueño se haga realidad en el año 2.222.</p>
                 <p>&nbsp;</p>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="currentLanguage == availableLanguages.ENGLISH" class="col-sm-6">
+            <div *ngIf="currentLanguage == 'english'" class="col-sm-6">
                 <div class="ideas clearfix">
                     <div class="imaginersBox">
                         <img src="assets/images/plain.png" />
@@ -97,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="currentLanguage == availableLanguages.SPANISH" class="col-sm-6">
+            <div *ngIf="currentLanguage == 'spanish'" class="col-sm-6">
                 <div class="ideas clearfix">
                     <div class="imaginersBox">
                         <img src="assets/images/plain.png" />

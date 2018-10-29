@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LanguagesService} from "../../services/languages.service";
 
 @Component({
   selector: 'app-privacy',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrivacyComponent implements OnInit {
 
-  constructor() { }
+  currentLanguage: string = '';
+
+  constructor(private langService:LanguagesService) { }
 
   ngOnInit() {
+    this.currentLanguage = this.langService.currentLanguage;
   }
 
 }

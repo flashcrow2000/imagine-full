@@ -49,10 +49,10 @@
               </a>
             </div>
           </div>
-          <a *ngIf="currentLanguage == availableLanguages.ENGLISH && !userLoggedIn" [routerLink]="['/signup']" class="btn btn-block btn-default btn-lg">BECOME IMAGINER</a>
-          <a *ngIf="currentLanguage == availableLanguages.SPANISH && !userLoggedIn" [routerLink]="['/signup']" class="btn btn-block btn-default btn-lg">AZTE IMAGINER</a>
-          <a *ngIf="currentLanguage == availableLanguages.ENGLISH && userLoggedIn" [routerLink]="['/new-idea']" class="btn btn-block btn-default btn-lg">ADD A NEW IDEA <span class="fa fa-plus-circle"></span></a>
-          <a *ngIf="currentLanguage == availableLanguages.SPANISH && userLoggedIn" [routerLink]="['/new-idea']" class="btn btn-block btn-default btn-lg">AÑADE UNA NUEVA IDEA <span class="fa fa-plus-circle"></span></a>
+          <a *ngIf="currentLanguage == 'english' && !userLoggedIn" [routerLink]="['/signup']" class="btn btn-block btn-default btn-lg">BECOME IMAGINER</a>
+          <a *ngIf="currentLanguage == 'spanish' && !userLoggedIn" [routerLink]="['/signup']" class="btn btn-block btn-default btn-lg">AZTE IMAGINER</a>
+          <a *ngIf="currentLanguage == 'english' && userLoggedIn" [routerLink]="['/new-idea']" class="btn btn-block btn-default btn-lg">ADD A NEW IDEA <span class="fa fa-plus-circle"></span></a>
+          <a *ngIf="currentLanguage == 'spanish' && userLoggedIn" [routerLink]="['/new-idea']" class="btn btn-block btn-default btn-lg">AÑADE UNA NUEVA IDEA <span class="fa fa-plus-circle"></span></a>
         </div>
 
       </div>
@@ -62,7 +62,7 @@
   <section class="">
     <div class="container">
       <div class="row">
-        <div *ngIf="currentLanguage == availableLanguages.ENGLISH" class="col-sm-12">
+        <div *ngIf="currentLanguage == 'english'" class="col-sm-12">
           <h1 class="text-center">Ways to be Involved</h1>
           <ol class="featuredList">
             <li>You can sign the manifesto <a [routerLink]="['/signup']">here</a></li>.
@@ -70,7 +70,7 @@
             <li>We also would like to be in contact with the people that help us spread and develop "Imagine ALL THE PEOPLE" in their village, city or country. You can contact us <a href="mailto: info@imagineallthepeople.world">here</a></li>
           </ol>
         </div>
-        <div *ngIf="currentLanguage == availableLanguages.SPANISH" class="col-sm-12">
+        <div *ngIf="currentLanguage == 'spanish'" class="col-sm-12">
           <h1 class="text-center">Formas de involucrarse</h1>
           <ol class="featuredList">
             <li>Puedes firmar el manifesto <a [routerLink]="['/signup']">aquí</a></li>.

@@ -2,8 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-5 center-col">
-        <h1 *ngIf="currentLanguage == availableLanguages.ENGLISH" class="font-family: 'Gochi Hand', cursive;">Log In</h1>
-        <h1 *ngIf="currentLanguage == availableLanguages.SPANISH" class="font-family: 'Gochi Hand', cursive;">Iniciar Sesión</h1>
+        <h1 *ngIf="currentLanguage == 'english'" class="font-family: 'Gochi Hand', cursive;">Log In</h1>
+        <h1 *ngIf="currentLanguage == 'spanish'" class="font-family: 'Gochi Hand', cursive;">Iniciar Sesión</h1>
         <form name="form" accept-charset="utf-8"
               (ngSubmit)="f.form.valid && login()"
               #f="ngForm" novalidate>
@@ -14,13 +14,13 @@
           </div>
           <div class="form-group has-feedback"
                [ngClass]="{ 'has-error': (f.submitted && !username.valid) || invalidCreds }">
-            <label *ngIf="currentLanguage == availableLanguages.ENGLISH" for="username">E-mail: </label>
-            <label *ngIf="currentLanguage == availableLanguages.SPANISH" for="username">Correo electrónico: </label>
-            <input *ngIf="currentLanguage == availableLanguages.ENGLISH" type="text" id="username" name="username"
+            <label *ngIf="currentLanguage == 'english'" for="username">E-mail: </label>
+            <label *ngIf="currentLanguage == 'spanish'" for="username">Correo electrónico: </label>
+            <input *ngIf="currentLanguage == 'english'" type="text" id="username" name="username"
                    value="" class="form-control"
                    placeholder="&#xf0e0; Email"
                    [(ngModel)]="model.username" #username="ngModel" required>
-            <input *ngIf="currentLanguage == availableLanguages.SPANISH" type="text" id="username" name="username"
+            <input *ngIf="currentLanguage == 'spanish'" type="text" id="username" name="username"
                    value="" class="form-control"
                    placeholder="&#xf0e0; Correo electrónico"
                    [(ngModel)]="model.username" #username="ngModel" required>
@@ -36,28 +36,28 @@
           </div>
           <div class="form-group has-feedback"
                [ngClass]="{ 'has-error': (f.submitted && !password.valid) || invalidCreds }">
-            <label *ngIf="currentLanguage == availableLanguages.ENGLISH" for="password">Password: </label>
-            <label *ngIf="currentLanguage == availableLanguages.SPANISH" for="password">Contraseña: </label>
-            <input *ngIf="currentLanguage == availableLanguages.ENGLISH" type="password" id="password" name="password" value=""
+            <label *ngIf="currentLanguage == 'english'" for="password">Password: </label>
+            <label *ngIf="currentLanguage == 'spanish'" for="password">Contraseña: </label>
+            <input *ngIf="currentLanguage == 'english'" type="password" id="password" name="password" value=""
                    class="form-control" placeholder="&#xf023; Password"
                    [(ngModel)]="model.password" #password="ngModel" required >
-            <input *ngIf="currentLanguage == availableLanguages.SPANISH" type="password" id="password" name="password" value=""
+            <input *ngIf="currentLanguage == 'spanish'" type="password" id="password" name="password" value=""
                    class="form-control" placeholder="&#xf023; Contraseña"
                    [(ngModel)]="model.password" #password="ngModel" required >
             <span id="passwordStatus" class="sr-only">(success)</span>
           </div>
-          <button *ngIf="currentLanguage == availableLanguages.ENGLISH" [disabled]="loading" class="btn btn-default form-control">Log In</button>
-          <button *ngIf="currentLanguage == availableLanguages.SPANISH" [disabled]="loading" class="btn btn-default form-control">Iniciar Sesión</button>
-          <p *ngIf="currentLanguage == availableLanguages.ENGLISH">Don't have an account? <a [routerLink]="['/signup']" title="Create new account">Sign up</a></p>
-          <p *ngIf="currentLanguage == availableLanguages.SPANISH">¿No tienes una cuenta? <a [routerLink]="['/signup']" title="Create new account">Registro</a></p>
-          <p *ngIf="currentLanguage == availableLanguages.ENGLISH"><a (click)="showForgotPassword()" title="Forgot your password">Forgot your password?</a></p>
-          <p *ngIf="currentLanguage == availableLanguages.SPANISH"><a (click)="showForgotPassword()" title="Forgot your password">¿Olvidaste tu contraseña?</a></p>
+          <button *ngIf="currentLanguage == 'english'" [disabled]="loading" class="btn btn-default form-control">Log In</button>
+          <button *ngIf="currentLanguage == 'spanish'" [disabled]="loading" class="btn btn-default form-control">Iniciar Sesión</button>
+          <p *ngIf="currentLanguage == 'english'">Don't have an account? <a [routerLink]="['/signup']" title="Create new account">Sign up</a></p>
+          <p *ngIf="currentLanguage == 'spanish'">¿No tienes una cuenta? <a [routerLink]="['/signup']" title="Create new account">Registro</a></p>
+          <p *ngIf="currentLanguage == 'english'"><a (click)="showForgotPassword()" title="Forgot your password">Forgot your password?</a></p>
+          <p *ngIf="currentLanguage == 'spanish'"><a (click)="showForgotPassword()" title="Forgot your password">¿Olvidaste tu contraseña?</a></p>
 
         </form>
 
         <div class="well">
-          <a *ngIf="currentLanguage == availableLanguages.ENGLISH" [routerLink]="['/ideas']" [queryParams]="{q: 'popular'}" title="Latest Ideas">Check out the most popular ideas here</a>
-          <a *ngIf="currentLanguage == availableLanguages.SPANISH" [routerLink]="['/ideas']" [queryParams]="{q: 'popular'}" title="Latest Ideas">Mira las ideas más populares aquí</a>
+          <a *ngIf="currentLanguage == 'english'" [routerLink]="['/ideas']" [queryParams]="{q: 'popular'}" title="Latest Ideas">Check out the most popular ideas here</a>
+          <a *ngIf="currentLanguage == 'spanish'" [routerLink]="['/ideas']" [queryParams]="{q: 'popular'}" title="Latest Ideas">Mira las ideas más populares aquí</a>
         </div>
       </div>
 
