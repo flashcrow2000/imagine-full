@@ -1,10 +1,9 @@
-/// <reference types="@types/googlemaps" />
 import {ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { UserService } from '../../services/user.service'
 
 import { MapsAPILoader } from '@agm/core';
-import {} from 'googlemaps';
+import {} from '@types/googlemaps';
 import {User} from "app/shared/user.model";
 import {Router} from "@angular/router";
 
