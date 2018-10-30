@@ -3,7 +3,7 @@ import { FormControl } from "@angular/forms";
 import { UserService } from '../../services/user.service'
 
 import { MapsAPILoader } from '@agm/core';
-import {} from '@types/googlemaps';
+import {} from 'googlemaps';
 import {User} from "app/shared/user.model";
 import {Router} from "@angular/router";
 
