@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compile_@agm_core": "babel node_modules/@agm/core -d node_modules/@agm/core",
-    "compile_ngx_bootstrap": "node_modules/babel-cli/bin/babel node_modules/ngx-bootstrap -d node_modules/ngx-bootstrap",
+    "compile_ngx_bootstrap": "babel node_modules/ngx-bootstrap -d node_modules/ngx-bootstrap",
     "postinstall": "npm run compile_@agm_core && npm run compile_ngx_bootstrap"
   },
   "private": true,
