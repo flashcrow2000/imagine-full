@@ -1,3 +1,4 @@
+/// <reference types="@types/googlemaps" />
 import {ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { UserService } from '../../services/user.service'
